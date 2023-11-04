@@ -1,0 +1,107 @@
+/* Reset default styles and add some basic styling */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Heading */
+h2 {
+    font-size: 20px;
+    margin-bottom: 20px;
+    color: #333;
+}
+
+h1 {
+    font-size: 20px;
+    margin-bottom: 20px;
+    color: #333;
+}
+
+p {
+    font-size: 15px;
+    margin-bottom: 15px;
+    color: #333;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f0f0f0;
+    margin: 0;
+}
+
+/* Style the header with a navigation menu */
+header {
+    background-color: #3f51b5;
+    color: #fff;
+    padding: 10px 0;
+    text-align: center;
+}
+
+nav ul {
+    list-style-type: none;
+}
+
+nav li {
+    display: inline;
+    margin-right: 20px;
+}
+
+nav a {
+    color: #fff;
+    text-decoration: none;
+}
+
+/* Style the main content section */
+.main-content {
+    padding: 20px;
+}
+
+.welcome-message {
+    text-align: center;
+    padding: 50px;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    margin-bottom: 50px;
+}
+
+.trading-platform {
+    text-align: center;
+    padding: 50px;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    margin-bottom: 50px;
+}
+
+.currency-rates {
+    display: inline-block;
+    text-align: left;
+    padding: 10px;
+}
+
+.market-trends {
+    display: inline-block;
+    text-align: right;
+    padding: 10px 200px;
+}
+
+.btn {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #3f51b5;
+    color: #fff;
+    text-decoration: double;
+    border-radius: 20px;
+}
+
+/* Style the footer */
+footer {
+    background-color: #3f51b5;
+    color: #fff;
+    text-align: center;
+    padding: 10px;
+}
+
+/* Add styles for other sections like currency rates and market trends as needed */
