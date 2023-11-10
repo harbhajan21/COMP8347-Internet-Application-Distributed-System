@@ -39,8 +39,8 @@
                 <li><a href="#">Market Trends</a></li>
                 <li><a href="#">Currency Rates</a></li>
                 <li><a href="#">Trading Patterns</a></li>
-                <li><a href="#">Account</a></li>
-                <li><a href="{% url 'signout' %}">Sign Out</a></li>
+                <li><a href="{% url 'signin' %}">Sign In</a></li>
+                <li><a href="{% url 'signup' %}">Sign Up</a></li>
             </ul>
         </nav>
     </header>
@@ -52,7 +52,7 @@
         <div class="trading-platform">
             <h2>Start Trading Today</h2>
             <p>Join our platform and access the world of online trading. Buy and sell currencies, cryptocurrencies, and stocks.</p>
-            <a href="{% url 'trading' %}" class="btn">Start Trading</a>  <!-- Replace 'trading' with your trading page URL -->
+            <a href="{% url 'signin' %}" class="btn">Sign In to Start Trading</a>  <!-- Replace 'signin' with your sign-in page URL -->
         </div>
     </section>
     <section class="currency-rates">
@@ -64,11 +64,6 @@
 {#        <h2>Market Trends</h2>#}
         <a href="{% url 'markettrends' %}" class="btn">Market Trends</a>
         <!-- Display market trends and charts here -->
-    </section>
-    <section class="payment">
-{#        <h2>Payment</h2>#}
-        <a href="{% url 'payment_page' %}" class="btn">Payment</a>
-        <!-- Display payment here -->
     </section>
     <!-- Contact Section -->
     <div class="contact-section">
