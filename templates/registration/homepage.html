@@ -7,6 +7,20 @@
     <title>Windsor Forex Trading Platform</title>
     <link rel="stylesheet" href="{% static 'myApp/style.css' %}">  <!-- Include your CSS file here -->
     <style>
+        .toggle-section {
+            background-color: white;
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+            color: white;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+            margin-bottom: 25px;
+            box-sizing: border-box;
+            display: flex;
+            justify-content: flex-end;
+            align-items: flex-start;
+
+        }
         .contact-section {
             background-color: white;
             padding: 20px;
@@ -29,6 +43,46 @@
             border-radius: 10px;
             font-size: 15px;
         }
+        .sections-container {
+        display: flex;
+        justify-content: space-around; /* Adjust this based on your layout preference */
+        align-items: center; /* Adjust this based on your layout preference */
+    }
+
+    .currency-rates, .market-trends, .payment {
+        /* Add any additional styling for individual sections if needed */
+        margin: 0 10px; /* Adjust the margin based on your preference */
+    }
+
+
+
+        #toggle-container {
+            margin-top: 10px;
+            margin-right: 10px;
+        }
+
+        #toggle {
+            display: none;
+        }
+
+        #toggle-label {
+            background-color: #3498db;
+            color: #fff;
+            padding: 10px;
+            cursor: pointer;
+            user-select: none;
+        }
+
+        #content {
+            display: none; /* Initially hide the content */
+            padding: 10px;
+            border: 1px solid #ccc;
+            margin-top: 10px;
+        }
+
+        #toggle:checked + #toggle-label + #content {
+            display: block;
+        }
     </style>
 </head>
 <body>
@@ -44,6 +98,16 @@
             </ul>
         </nav>
     </header>
+<section class="toggle-section">
+   <div id="toggle-container">
+        <input type="checkbox" id="toggle">
+        <label for="toggle" id="toggle-label">Toggle Content</label>
+        <div id="content">
+            <p>This is the content of the div. It can be hidden or shown.</p>
+        </div>
+    </div>
+</section>
+
     <section class="main-content">
         <div class="welcome-message">
             <h1>Welcome to Forex Trading</h1>
@@ -55,7 +119,8 @@
             <a href="{% url 'trading' %}" class="btn">Start Trading</a>  <!-- Replace 'trading' with your trading page URL -->
         </div>
     </section>
-    <section class="currency-rates">
+    <div class = "sections-container">
+        <section class="currency-rates">
 {#        <h2>Live Currency Rates</h2>#}
         <a href="{% url 'livecurrencyrates' %}" class="btn">Live Currency Rates</a>
         <!-- Add a currency rates widget here -->
@@ -70,6 +135,7 @@
         <a href="{% url 'payment_page' %}" class="btn">Payment</a>
         <!-- Display payment here -->
     </section>
+    </div>
     <!-- Contact Section -->
     <div class="contact-section">
         <h2>Contact Us</h2>
@@ -82,5 +148,16 @@
     <footer>
         <p>&copy; 2023 Windsor Forex Trading Platform. All rights reserved.</p>
     </footer>
+
+ <script>
+        function toggleContent(show) {
+            var content = document.getElementById("content");
+            if (show) {
+                content.style.display = "block";
+            } else {
+                content.style.display = "none";
+            }
+        }
+    </script>
 </body>
 </html>
