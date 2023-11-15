@@ -64,8 +64,10 @@ def signin_view(request):
         form = SigninForm()
     return render(request, 'registration/signin.html', {'form': form})
 
+
 def success_view(request):
     return render(request, 'registration/success.html')  # Replace 'success.html' with your success page template
+
 
 def homepage_view(request):
     return render(request, 'registration/homepage.html')  # 'homepage.html' is the template for your homepage
@@ -76,7 +78,9 @@ def signout_view(request):
     logout(request)
 
     # Redirect to the homepage or any other page you prefer
-    return render(request, 'registration/signed_out.html')#redirect('signup')  # Replace 'homepage' with the name of your homepage URL pattern
+    return render(request,
+                  'registration/signed_out.html')  # redirect('signup')  # Replace 'homepage' with the name of your homepage URL pattern
+
 
 # def signed_out(request):
 #     return render(request, 'registration/signed_out.html')
@@ -85,9 +89,11 @@ def trading_view(request):
     # Your view logic here
     return render(request, 'registration/trading.html')
 
+
 def livecurrencyrates_view(request):
     # Your view logic here
     return render(request, 'registration/livecurrencyrates.html')
+
 
 def markettrends_view(request):
     # Your view logic here
@@ -116,3 +122,6 @@ def successful_payment(request):
 def cancelled_payment(request):
     return render(request, homepage)
 
+
+def place_order(request):
+    return render(request, homepage)
