@@ -1,0 +1,96 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Windsor Forex Trading Platform</title>
+    <link rel="stylesheet" href="{% static 'myApp/style.css' %}">  <!-- Include your CSS file here -->
+</head>
+<body>
+    <header>
+        <nav>
+            <ul>
+                <li><a href="#">Home</a></li>
+                <li><a href="#">Market Trends</a></li>
+                <li><a href="#">Currency Rates</a></li>
+                <li><a href="#">Trading Patterns</a></li>
+                <li><a href="#">Account</a></li>
+                <li><a href="{% url 'signout' %}">Sign Out</a></li>
+            </ul>
+        </nav>
+    </header>
+    <div class="toggle-highlights">
+        <div class="toggle-container">
+        <span class="toggle-label-text">Highlights</span>
+        <label class="toggle-switch">
+            <input type="checkbox" id="highlightToggle" onchange="toggleHighlights()">
+            <span class="slider round"></span>
+        </label>
+    </div>
+        <div id="content" style="display:none;">
+            <!-- Content to be toggled -->
+            <p>This is the content that will be shown or hidden when the toggle is switched.</p>
+        </div>
+    </div>
+
+
+
+    <section class="main-content">
+        <div class="welcome-message">
+            <h1>Welcome to Forex Trading</h1>
+            <p>Trade Forex, Cryptocurrencies, and Stocks with ease.</p>
+        </div>
+        <div class="trading-platform">
+            <h2>Start Trading Today</h2>
+            <p>Join our platform and access the world of online trading. Buy and sell currencies, cryptocurrencies, and stocks.</p>
+            <a href="{% url 'trading' %}" class="btn">Start Trading</a>  <!-- Replace 'trading' with your trading page URL -->
+        </div>
+    </section>
+    <div class = "sections-container">
+        <section class="currency-rates">
+{#        <h2>Live Currency Rates</h2>#}
+        <a href="{% url 'livecurrencyrates' %}" class="btn">Live Currency Rates</a>
+        <!-- Add a currency rates widget here -->
+    </section>
+    <section class="market-trends">
+{#        <h2>Market Trends</h2>#}
+        <a href="{% url 'markettrends' %}" class="btn">Market Trends</a>
+        <!-- Display market trends and charts here -->
+    </section>
+    <section class="payment">
+{#        <h2>Payment</h2>#}
+        <a href="{% url 'payment_page' %}" class="btn">Payment</a>
+        <!-- Display payment here -->
+    </section>
+    </div>
+    <!-- Contact Section -->
+    <div class="contact-section">
+        <h2>Contact Us</h2>
+        <p>Email: contact@windsortrading.ca</p>
+        <p>Phone: +1 437-123-4567</p>
+    </div>
+    <section>
+        <p> </p>
+    </section>
+    <footer>
+        <p>&copy; 2023 Windsor Forex Trading Platform. All rights reserved.</p>
+    </footer>
+
+<script>
+  function toggleHighlights() {
+    const content = document.getElementById('content');
+    console.log('Toggle state:', document.getElementById('highlightToggle').checked); // Debugging line
+
+    if (document.getElementById('highlightToggle').checked) {
+      console.log('Showing content'); // Debugging line
+      content.style.display = 'block';
+    } else {
+      console.log('Hiding content'); // Debugging line
+      content.style.display = 'none';
+    }
+  }
+</script>
+
+</body>
+</html>

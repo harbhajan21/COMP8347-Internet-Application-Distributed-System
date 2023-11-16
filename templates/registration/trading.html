@@ -1,0 +1,29 @@
+{% load static %}
+{#{% extends 'myApp/base.html' %}#}
+
+{% block content %}
+<div class="trading-page">
+    <div class="trading-pair">
+        <h2>Bitcoin (BTC) / US Dollar (USD)</h2>
+        <p>Price: $62,000</p>
+        <p>24h Change: +5%</p>
+    </div>
+
+    <div class="trading-chart">
+        <!-- You can include a trading chart widget or a link to an external charting service here. -->
+    </div>
+
+    <div class="trading-orders">
+        <h3>Place an Order</h3>
+        <form action="{% url 'place_order' %}" method="post">
+            {% csrf_token %}
+            <label for="quantity">Quantity:</label>
+            <input type="text" name="quantity" id="quantity">
+            <label for="price">Price:</label>
+            <input type="text" name="price" id="price">
+            <button type="submit">Buy</button>
+            <button type="submit">Sell</button>
+        </form>
+    </div>
+</div>
+{% endblock %}

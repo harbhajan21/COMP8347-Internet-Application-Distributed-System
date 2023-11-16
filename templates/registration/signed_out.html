@@ -1,0 +1,81 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Windsor Forex Trading Platform</title>
+    <link rel="stylesheet" href="{% static 'myApp/style.css' %}">  <!-- Include your CSS file here -->
+    <style>
+        .contact-section {
+            background-color: white;
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+            color: white;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+            margin-bottom: 25px;
+            box-sizing: border-box;
+        }
+        .contact-section h2 {
+            font-family: Arial, sans-serif;
+            border-radius: 10px;
+            font-size: 20px;
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
+        .contact-section p {
+            font-family: Arial, sans-serif;
+            border-radius: 10px;
+            font-size: 15px;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav>
+            <ul>
+                <li><a href="#">Home</a></li>
+                <li><a href="#">Market Trends</a></li>
+                <li><a href="#">Currency Rates</a></li>
+                <li><a href="#">Trading Patterns</a></li>
+                <li><a href="{% url 'signin' %}">Sign In</a></li>
+                <li><a href="{% url 'signup' %}">Sign Up</a></li>
+            </ul>
+        </nav>
+    </header>
+    <section class="main-content">
+        <div class="welcome-message">
+            <h1>Welcome to Forex Trading</h1>
+            <p>Trade Forex, Cryptocurrencies, and Stocks with ease.</p>
+        </div>
+        <div class="trading-platform">
+            <h2>Start Trading Today</h2>
+            <p>Join our platform and access the world of online trading. Buy and sell currencies, cryptocurrencies, and stocks.</p>
+            <a href="{% url 'signin' %}" class="btn">Sign In to Start Trading</a>  <!-- Replace 'signin' with your sign-in page URL -->
+        </div>
+    </section>
+    <section class="currency-rates">
+{#        <h2>Live Currency Rates</h2>#}
+        <a href="{% url 'livecurrencyrates' %}" class="btn">Live Currency Rates</a>
+        <!-- Add a currency rates widget here -->
+    </section>
+    <section class="market-trends">
+{#        <h2>Market Trends</h2>#}
+        <a href="{% url 'markettrends' %}" class="btn">Market Trends</a>
+        <!-- Display market trends and charts here -->
+    </section>
+    <!-- Contact Section -->
+    <div class="contact-section">
+        <h2>Contact Us</h2>
+        <p>Email: contact@windsortrading.ca</p>
+        <p>Phone: +1 437-123-4567</p>
+    </div>
+    <section>
+        <p> </p>
+    </section>
+    <footer>
+        <p>&copy; 2023 Windsor Forex Trading Platform. All rights reserved.</p>
+    </footer>
+</body>
+</html>
