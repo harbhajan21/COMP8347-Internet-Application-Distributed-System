@@ -20,15 +20,19 @@
             </ul>
         </nav>
     </header>
-<section class="toggle-section">
-   <div id="toggle-container">
-        <input type="checkbox" id="toggle">
-        <label for="toggle" id="toggle-label">Toggle Content</label>
-        <div id="content">
-            <p>This is the content of the div. It can be hidden or shown.</p>
+ <div class="toggle-highlights">
+        <div class="toggle-container">
+        <span class="toggle-label-text">Highlights</span>
+        <label class="toggle-switch">
+            <input type="checkbox" id="highlightToggle" onchange="toggleHighlights()">
+            <span class="slider round"></span>
+        </label>
+    </div>
+        <div id="content" style="display:none;">
+            <!-- Content to be toggled -->
+            <p>This is the content that will be shown or hidden when the toggle is switched.</p>
         </div>
     </div>
-</section>
 
     <section class="main-content">
         <div class="welcome-message">
@@ -72,14 +76,18 @@
     </footer>
 
  <script>
-        function toggleContent(show) {
-            var content = document.getElementById("content");
-            if (show) {
-                content.style.display = "block";
-            } else {
-                content.style.display = "none";
-            }
-        }
-    </script>
+  function toggleHighlights() {
+    const content = document.getElementById('content');
+    console.log('Toggle state:', document.getElementById('highlightToggle').checked); // Debugging line
+
+    if (document.getElementById('highlightToggle').checked) {
+      console.log('Showing content'); // Debugging line
+      content.style.display = 'block';
+    } else {
+      console.log('Hiding content'); // Debugging line
+      content.style.display = 'none';
+    }
+  }
+</script>
 </body>
 </html>
