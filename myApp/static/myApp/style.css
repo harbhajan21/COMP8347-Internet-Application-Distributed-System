@@ -201,19 +201,44 @@ footer {
 
 /* Styles for the toggle switch */
 /* Container for the whole toggle switch, ensures the background is white and content is aligned */
-.toggle-container {
-  display: flex;
-  align-items: center;
-  background-color: white;
-  padding: 5px; /* Adjust padding as necessary */
-  border-radius: 5px;
-  justify-content: flex-end; /* Aligns the toggle switch to the right */
-  width: 100%; /* Ensures the container fills the width */
-}
+/*.toggle-container {*/
+/*  display: flex;*/
+/*  align-items: center;*/
+/*  background-color: white;*/
+/*  padding: 25px;*/
+/*  border-radius: 10px;*/
+/*  justify-content: flex-end;*/
+/*  width: 100%;*/
+/*  margin-bottom: 20px;*/
+/*  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);*/
+/*}*/
 
 .toggle-highlights{
-    background-color: white;
+  display: flex;
+    flex-direction: column;
+  align-items: flex-end;
+  background-color: white;
+  padding: 25px;
+  border-radius: 10px;
+  justify-content: flex-end;
+  width: 100%;
+  margin-bottom: 20px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
 }
+
+#content {
+    margin-top: 10px; /* Add some margin for separation */
+    width: 100%;
+}
+
+.toggle-container {
+    margin-left: auto; /* Push the toggle-container to the right side */
+}
+
+.toggle-label-text {
+    margin-right: 10px; /* Add some margin for spacing between label and switch */
+}
+
 /* Styles for the text label, placed next to the toggle */
 .toggle-label-text {
   margin-right: 10px; /* Adds some space between the text and the toggle */
