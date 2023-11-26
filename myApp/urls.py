@@ -1,5 +1,7 @@
 from django.urls import path, include
 from myApp import views
+# from django.urls import path
+# from .views import contact
 
 urlpatterns = [
     # ... Other URL patterns ...
@@ -15,10 +17,8 @@ urlpatterns = [
     path('markettrends/', views.markettrends_view, name='markettrends'),
     path('payment/', views.payment_page, name='payment_page'),
     path('payment-confirm/', views.payment_confirm, name='payment_confirm'),
-    path('place_order/',views.place_order, name='place_order')
+    path('place_order/',views.place_order, name='place_order'),
     # path('paypal/', include('paypal.standard.ipn.urls')),
-
-
-
+    path('contact/', views.contact, name='contact'),
 ]
 

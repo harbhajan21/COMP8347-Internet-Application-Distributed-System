@@ -35,6 +35,7 @@ urlpatterns = [
     path('payment/', views.payment_page, name='payment_page'),
     path('payment-confirm/', views.payment_confirm, name='payment_confirm'),
     # path('paypal/', include('paypal.standard.ipn.urls')),
+    path('contact/', views.contact, name='contact'),
 ]
 
 if settings.DEBUG:

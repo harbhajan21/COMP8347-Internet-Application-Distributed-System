@@ -128,3 +128,20 @@ DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
+# settings.py
+ALLOWED_HOSTS = ['*']
+# settings.py
+
+
+# settings.py
+
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.mail.yahoo.com'
+EMAIL_PORT = 587  # Use the appropriate port for your SMTP server
+EMAIL_USE_TLS = True  # Use TLS for secure connection
+EMAIL_HOST_USER = 'rahul.manjinder@yahoo.com'  # Replace with your email address
+EMAIL_HOST_PASSWORD = 'oobjmomzctzgmgwu'  # Replace with your email password
+DEFAULT_FROM_EMAIL ='rahul.manjinder@yahoo.com'
+EMAIL_DEBUG = True
+
+
