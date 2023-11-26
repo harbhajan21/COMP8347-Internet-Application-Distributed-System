@@ -15,7 +15,7 @@ urlpatterns = [
     path('markettrends/', views.markettrends_view, name='markettrends'),
     path('payment/', views.payment_page, name='payment_page'),
     path('payment-confirm/', views.payment_confirm, name='payment_confirm'),
-    path('place_order/',views.place_order, name='place_order')
+    path('place_order/',views.place_order, name='place_order'),
     # path('paypal/', include('paypal.standard.ipn.urls')),
 
 

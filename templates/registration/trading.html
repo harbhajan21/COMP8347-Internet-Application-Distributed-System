@@ -1,29 +1,69 @@
+{% extends 'registration/base.html' %}
 {% load static %}
-{#{% extends 'myApp/base.html' %}#}
-
 {% block content %}
 <div class="trading-page">
-    <div class="trading-pair">
-        <h2>Bitcoin (BTC) / US Dollar (USD)</h2>
-        <p>Price: $62,000</p>
-        <p>24h Change: +5%</p>
-    </div>
+    <div class="trading-container">
+        <div class="left-column">
+            <div class="trading-pair">
+                <h2>Bitcoin (BTC) / US Dollar (USD)</h2>
+                <p>Price: $62,000</p>
+                <p>24h Change: +5%</p>
+            </div>
 
-    <div class="trading-chart">
-        <!-- You can include a trading chart widget or a link to an external charting service here. -->
-    </div>
+            <div class="trading-order">
+                <h3>Place an Order</h3>
+                <form action="{% url 'place_order' %}" method="post">
+                    {% csrf_token %}
+                    <div class="form-group">
+                        <label for="quantity">Quantity:</label>
+                        <input type="text" name="quantity" id="quantity" class="form-control" placeholder="Enter quantity" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="price">Price:</label>
+                        <input type="text" name="price" id="price" class="form-control" placeholder="Enter price" required>
+                    </div>
+                    <div class="form-group">
+                        <button type="submit" class="btn btn-success">Buy</button>
+                        <button type="submit" class="btn btn-danger">Sell</button>
+                    </div>
+                </form>
+            </div>
+        </div>
 
-    <div class="trading-orders">
-        <h3>Place an Order</h3>
-        <form action="{% url 'place_order' %}" method="post">
-            {% csrf_token %}
-            <label for="quantity">Quantity:</label>
-            <input type="text" name="quantity" id="quantity">
-            <label for="price">Price:</label>
-            <input type="text" name="price" id="price">
-            <button type="submit">Buy</button>
-            <button type="submit">Sell</button>
-        </form>
+        <div class="right-column">
+            <div class="trading-chart">
+                <!-- Trading Chart Canvas -->
+                <canvas id="myChart" width="400" height="400"></canvas>
+            </div>
+        </div>
     </div>
 </div>
+
+<!-- Include Chart.js from CDN -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<script>
+    // Assuming 'data' and 'labels' are passed from your Django view to the template
+    const ctx = document.getElementById('myChart').getContext('2d');
+    const myChart = new Chart(ctx, {
+        type: 'line', // Change to 'bar', 'pie', etc. as needed
+        data: {
+            labels: {{ labels|safe }}, // Labels for the X-axis
+            datasets: [{
+                label: 'BTC/USD Price',
+                data: {{ data|safe }}, // Data points for the Y-axis
+                backgroundColor: 'rgba(54, 162, 235, 0.2)', // Customize as needed
+                borderColor: 'rgba(54, 162, 235, 1)', // Customize as needed
+                borderWidth: 1
+            }]
+        },
+        options: {
+            scales: {
+                y: {
+                    beginAtZero: false
+                }
+            }
+        }
+    });
+</script>
 {% endblock %}
