@@ -100,6 +100,11 @@ def markettrends_view(request):
     return render(request, 'registration/markettrends.html')
 
 
+@login_required
+def account_details(request):
+    return render(request, 'registration/account_details.html', {'request': request})
+
+
 def payment_page(request):
     return render(request, 'payment/payment-page.html')
     # return redirect('payment_page')
@@ -125,3 +130,65 @@ def cancelled_payment(request):
 
 def place_order(request):
     return render(request, homepage)
+
+
+## Functions for Highligths Start
+from django.shortcuts import render
+import requests
+
+def dashboard(request):
+    api_key = 'coinrankingae631d1d5459748c6ec3a765f23471d6c612b840fc2d9938'
+    headers = {'x-access-token': api_key}
+    # response = requests.get("https://api.coinranking.com/v2/coins", headers=headers)
+    # data = response.json().get('data', {}).get('coins', [])[:50]  # Get the top 50 coins
+    api_url = "https://api.coinranking.com/v2/coins"
+    response = requests.get(api_url)
+
+    if response.status_code == 200:
+        data = response.json().get("data", {}).get("coins", [])[:100]
+        formatted_currencies = []
+
+        # Create Currency objects with data from the CoinCap API
+        for coin in data:
+            coin_id = coin.get('uuid', '')
+            name = coin.get('name', '')
+            symbol = coin.get('symbol', 'BTS')
+            icon_url = coin.get('iconUrl', 'https://cdn.coinranking.com/bOabBYkcX/bitcoin_btc.svg')
+
+    return render(request, 'highlights/dashboard.html', {'coins': data})
+
+
+def buy_coin(request, symbol):
+    # Logic for buying the coin
+    return render(request, 'highlights/buy_coin.html', {'symbol': symbol})
+
+def sell_coin(request, symbol):
+    # Logic for selling the coin
+    return render(request, 'highlights/sell_coin.html', {'symbol': symbol})
+
+
+def dashboard(request):
+    api_key = 'coinrankingae631d1d5459748c6ec3a765f23471d6c612b840fc2d9938'
+    headers = {'x-access-token': api_key}
+    api_url = "https://api.coinranking.com/v2/coins"
+
+    response = requests.get(api_url)
+
+    if response.status_code == 200:
+        data = response.json().get("data", {}).get("coins", [])[:100]
+
+        # Extracting top 5 and bottom 5 coins
+        top_5_coins = data[:5]
+        bottom_5_coins = data[-5:]
+
+        # Assuming you have payment history data, replace the following line with your actual data retrieval logic
+        payment_history_data = []
+
+        return render(request, 'highlights/dashboard.html', {
+            'top_5_coins': top_5_coins,
+            'bottom_5_coins': bottom_5_coins,
+            'payment_history': payment_history_data,
+            'coins': data,
+        })
+
+## Functions for Highligths Ends

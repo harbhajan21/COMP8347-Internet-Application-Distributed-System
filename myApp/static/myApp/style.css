@@ -307,3 +307,52 @@ input:checked + .slider:before {
 .slider.round:before {
   border-radius: 50%;
 }
+
+/*styles for coins*/
+.coin-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+}
+
+.coin-table th, .coin-table td {
+  border: 1px solid #ddd;
+  padding: 8px;
+  text-align: left;
+}
+
+.coin-table th {
+  background-color: #f2f2f2;
+}
+
+.coin-table img {
+  max-width: 50px;
+  max-height: 50px;
+}
+
+/* Add custom styles here */
+.coin-table th, .coin-table td {
+  text-align: center;
+}
+
+.coin-logo {
+  max-width: 40px;
+  max-height: 40px;
+}
+
+.card {
+  border: 2px solid #17a2b8;
+  margin-bottom: 20px;
+}
+
+.card-title {
+  color: #17a2b8;
+  font-size: 1.5rem;
+}
+
+.highlight-title {
+  color: #fff;
+  background-color: #17a2b8;
+  padding: 10px;
+  border-radius: 5px;
+}
