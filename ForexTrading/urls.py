@@ -15,16 +15,15 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path
-
-urlpatterns = [
-    path("admin/", admin.site.urls),
-]
-from django.urls import path
+from django.urls import path, include
+from django.conf import settings
+from django.conf.urls.static import static
 from myApp import views
 
 urlpatterns = [
-    # ... Other URL patterns ...
+    path("admin/", admin.site.urls),
+    path('', views.homepage, name='homepage'),  # Set homepage.html as the default homepage
+    path('myApp/', include('myApp.urls')),
     path('signup/', views.signup_view, name='signup'),
     path('signin/', views.signin_view, name='signin'),
     path('success/', views.success_view, name='success_view'),
@@ -33,5 +32,11 @@ urlpatterns = [
     path('trading/', views.trading_view, name='trading'),
     path('livecurrencyrates/', views.livecurrencyrates_view, name='livecurrencyrates'),
     path('markettrends/', views.markettrends_view, name='markettrends'),
-
+    path('payment/', views.payment_page, name='payment_page'),
+    path('payment-confirm/', views.payment_confirm, name='payment_confirm'),
+    # path('paypal/', include('paypal.standard.ipn.urls')),
 ]
+
+if settings.DEBUG:
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+

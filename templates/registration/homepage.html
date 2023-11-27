@@ -1,10 +1,110 @@
+{#{% load static %}#}
+{#<!DOCTYPE html>#}
+{#<html lang="en">#}
+{#<head>#}
+{#    <meta charset="UTF-8">#}
+{#    <meta name="viewport" content="width=device-width, initial-scale=1.0">#}
+{#    <title>Windsor Forex Trading Platform</title>#}
+{#    <link rel="stylesheet" href="{% static 'myApp/style.css' %}">  <!-- Include your CSS file here -->#}
+{#</head>#}
+{#<body>#}
+{#    <header>#}
+{#        <nav>#}
+{#            <ul>#}
+{#                <li><a href="#">Home</a></li>#}
+{#                <li><a href="#">Market Trends</a></li>#}
+{#                <li><a href="{% url 'dashboard' %}">Currency Rates</a></li>#}
+{#                <li><a href="#">Trading Patterns</a></li>#}
+{#                <li><a href="{% url 'account_details' %}">Account</a></li>#}
+{#                <li><a href="{% url 'signout' %}">Sign Out</a></li>#}
+{#            </ul>#}
+{#        </nav>#}
+{#    </header>#}
+{##}
+{#    <section class="main-content">#}
+{##}
+{#        <div class="toggle-highlights">#}
+{#            <div class="toggle-container">#}
+{#                <span class="toggle-label-text">Highlights</span>#}
+{#                <label class="toggle-switch">#}
+{#                    <input type="checkbox" id="highlightToggle" onchange="toggleHighlights()">#}
+{#                    <span class="slider round"></span>#}
+{#                </label>#}
+{#            </div>#}
+{#            Adding Highlights Starts #}
+{#            <div id="content" style="display:none;">#}
+{#                <!-- Content to be toggled -->#}
+{#                <p>This is the content that will be shown or hidden when the toggle is switched.</p>#}
+{#            </div>#}
+{#            Adding Highlights Ends #}
+{#        </div>#}
+{##}
+{#        <div class="welcome-message">#}
+{#            <h1>Welcome to Forex Trading</h1>#}
+{#            <p>Trade Forex, Cryptocurrencies, and Stocks with ease.</p>#}
+{#        </div>#}
+{#        <div class="trading-platform">#}
+{#            <h2>Start Trading Today</h2>#}
+{#            <p>Join our platform and access the world of online trading. Buy and sell currencies, cryptocurrencies, and stocks.</p>#}
+{#            <a href="{% url 'trading' %}" class="btn">Start Trading</a>  <!-- Replace 'trading' with your trading page URL -->#}
+{#        </div>#}
+{#    </section>#}
+{#    <div class = "sections-container">#}
+{#        <section class="currency-rates">#}
+{#        <h2>Live Currency Rates</h2>#}
+{#        <a href="{% url 'livecurrencyrates' %}" class="btn">Live Currency Rates</a>#}
+{#        <!-- Add a currency rates widget here -->#}
+{#    </section>#}
+{#    <section class="market-trends">#}
+{#        <h2>Market Trends</h2>#}
+{#        <a href="{% url 'markettrends' %}" class="btn">Market Trends</a>#}
+{#        <!-- Display market trends and charts here -->#}
+{#    </section>#}
+{#    <section class="payment">#}
+{#        <h2>Payment</h2>#}
+{#        <a href="{% url 'payment_page' %}" class="btn">Payment</a>#}
+{#        <!-- Display payment here -->#}
+{#    </section>#}
+{#    </div>#}
+{#    <!-- Contact Section -->#}
+{#    <div class="contact-section">#}
+{#        <h2>Contact Us</h2>#}
+{#        <p>Email: contact@windsortrading.ca</p>#}
+{#        <p>Phone: +1 437-123-4567</p>#}
+{#    </div>#}
+{#    <section>#}
+{#        <p> </p>#}
+{#    </section>#}
+{#    <footer>#}
+{#        <p>&copy; 2023 Windsor Forex Trading Platform. All rights reserved.</p>#}
+{#    </footer>#}
+{##}
+{# <script>#}
+{#  function toggleHighlights() {#}
+{#    const content = document.getElementById('content');#}
+{#    console.log('Toggle state:', document.getElementById('highlightToggle').checked); // Debugging line#}
+{##}
+{#    if (document.getElementById('highlightToggle').checked) {#}
+{#      console.log('Showing content'); // Debugging line#}
+{#      content.style.display = 'block';#}
+{#    } else {#}
+{#      console.log('Hiding content'); // Debugging line#}
+{#      content.style.display = 'none';#}
+{#    }#}
+{#  }#}
+{#</script>#}
+{#</body>#}
+{#</html>#}
+
+
+
 {% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Forex Trading App</title>
+    <title>Windsor Forex Trading Platform</title>
     <link rel="stylesheet" href="{% static 'myApp/style.css' %}">  <!-- Include your CSS file here -->
 </head>
 <body>
@@ -13,36 +113,122 @@
             <ul>
                 <li><a href="#">Home</a></li>
                 <li><a href="#">Market Trends</a></li>
-                <li><a href="#">Currency Rates</a></li>
+                <li><a href="{% url 'dashboard' %}">Currency Rates</a></li>
                 <li><a href="#">Trading Patterns</a></li>
-                <li><a href="#">Account</a></li>
+                <li><a href="{% url 'account_details' %}">Account</a></li>
                 <li><a href="{% url 'signout' %}">Sign Out</a></li>
             </ul>
         </nav>
     </header>
+
     <section class="main-content">
+
+        <div class="toggle-highlights">
+            <div class="toggle-container">
+                <span class="toggle-label-text">Highlights</span>
+                <label class="toggle-switch">
+                    <input type="checkbox" id="highlightToggle" onchange="toggleHighlights()">
+                    <span class="slider round"></span>
+                </label>
+            </div>
+            {# Adding Highlights Starts #}
+            <div id="content" style="display:none;">
+                <!-- Content to be toggled -->
+                <p>This is the content that will be shown or hidden when the toggle is switched.</p>
+            </div>
+            {# Adding Highlights Ends #}
+        </div>
+
         <div class="welcome-message">
             <h1>Welcome to Forex Trading</h1>
             <p>Trade Forex, Cryptocurrencies, and Stocks with ease.</p>
+
+            {# Top 50 Coins Section Starts #}
+            <div class="container mt-4">
+                <h2 class="text-center mb-4">Top 50 Coins</h2>
+                <div class="table-responsive" style="max-height: 400px; overflow-y: auto;">
+                    <table class="table table-bordered coin-table">
+                        <thead class="thead-dark">
+                            <tr>
+                                <th>Coin Ranking</th>
+                                <th>Logo</th>
+                                <th>Name</th>
+                                <th>Symbol</th>
+                                <th>Price</th>
+                                <th>Buy/Sell</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for coin in coins %}
+                            <tr>
+                                <td>{{ forloop.counter }}</td>
+                                <td><img src="{{ coin.iconUrl }}" alt="{{ coin.name }} Logo" class="coin-logo"></td>
+                                <td>{{ coin.name }}</td>
+                                <td>{{ coin.symbol }}</td>
+                                <td>${{ coin.price }}</td>
+                                <td>
+                                    <!-- Add Buy/Sell buttons with appropriate links -->
+                                    <a href="{% url 'buy' coin.symbol %}" class="btn btn-success btn-sm">Buy</a>
+                                    <a href="{% url 'sell' coin.symbol %}" class="btn btn-danger btn-sm">Sell</a>
+                                </td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            {# Top 50 Coins Section Ends #}
         </div>
+
         <div class="trading-platform">
             <h2>Start Trading Today</h2>
             <p>Join our platform and access the world of online trading. Buy and sell currencies, cryptocurrencies, and stocks.</p>
             <a href="{% url 'trading' %}" class="btn">Start Trading</a>  <!-- Replace 'trading' with your trading page URL -->
         </div>
     </section>
-    <section class="currency-rates">
-{#        <h2>Live Currency Rates</h2>#}
-        <a href="{% url 'livecurrencyrates' %}" class="btn">Live Currency Rates</a>
-        <!-- Add a currency rates widget here -->
-    </section>
-    <section class="market-trends">
-{#        <h2>Market Trends</h2>#}
-        <a href="{% url 'markettrends' %}" class="btn">Market Trends</a>
-        <!-- Display market trends and charts here -->
+
+    <div class="sections-container">
+        <section class="currency-rates">
+            <a href="{% url 'livecurrencyrates' %}" class="btn">Live Currency Rates</a>
+            <!-- Add a currency rates widget here -->
+        </section>
+        <section class="market-trends">
+            <a href="{% url 'markettrends' %}" class="btn">Market Trends</a>
+            <!-- Display market trends and charts here -->
+        </section>
+        <section class="payment">
+            <a href="{% url 'payment_page' %}" class="btn">Payment</a>
+            <!-- Display payment here -->
+        </section>
+    </div>
+
+    <!-- Contact Section -->
+    <div class="contact-section">
+        <h2>Contact Us</h2>
+        <p>Email: contact@windsortrading.ca</p>
+        <p>Phone: +1 437-123-4567</p>
+    </div>
+
+    <section>
+        <p> </p>
     </section>
     <footer>
-        <p>&copy; 2023 Forex Trading App</p>
+        <p>&copy; 2023 Windsor Forex Trading Platform. All rights reserved.</p>
     </footer>
+
+    <script>
+        function toggleHighlights() {
+            const content = document.getElementById('content');
+            console.log('Toggle state:', document.getElementById('highlightToggle').checked); // Debugging line
+
+            if (document.getElementById('highlightToggle').checked) {
+                console.log('Showing content'); // Debugging line
+                content.style.display = 'block';
+            } else {
+                console.log('Hiding content'); // Debugging line
+                content.style.display = 'none';
+            }
+        }
+    </script>
 </body>
 </html>

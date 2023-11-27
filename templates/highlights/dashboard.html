@@ -1,0 +1,154 @@
+{% extends 'registration/base.html' %}
+
+{% load static %}
+
+{% block content %}
+  <div class="container mt-4">
+    <h2 class="text-center mb-4">Highlights</h2>
+
+    <div class="row">
+      <!-- Left Section: Top 5 Coins -->
+      <div class="col-md-4">
+        <div class="card h-100">
+          <div class="card-body">
+            <h3 class="card-title text-center mb-3 highlight-title">Top 5 Coins</h3>
+            <div class="table-responsive">
+              <table class="table table-bordered coin-table">
+                <thead>
+                  <tr>
+                    <th>Rank</th>
+                    <th>Logo</th>
+                    <th>Symbol</th>
+                    <th>Price</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {% for coin in top_5_coins %}
+                    <tr>
+                      <td>{{ forloop.counter }}</td>
+                      <td><img src="{{ coin.iconUrl }}" alt="{{ coin.name }} Logo"></td>
+                      <td>{{ coin.symbol }}</td>
+                      <td>${{ coin.price|floatformat:2 }}</td>
+                    </tr>
+                  {% endfor %}
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Middle Section: Bottom 5 Coins -->
+      <div class="col-md-4">
+        <div class="card h-100">
+          <div class="card-body">
+            <h3 class="card-title text-center mb-3 highlight-title">Bottom 5 Coins</h3>
+            <div class="table-responsive">
+              <table class="table table-bordered coin-table">
+                <thead>
+                  <tr>
+                    <th>Rank</th>
+                    <th>Logo</th>
+                    <th>Symbol</th>
+                    <th>Price</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {% for coin in bottom_5_coins %}
+                    <tr>
+                      <td>{{ forloop.counter }}</td>
+                      <td><img src="{{ coin.iconUrl }}" alt="{{ coin.name }} Logo"></td>
+                      <td>{{ coin.symbol }}</td>
+                      <td>${{ coin.price|floatformat:2 }}</td>
+                    </tr>
+                  {% endfor %}
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Right Section: Payment History -->
+      <div class="col-md-4">
+        <div class="card h-100">
+          <div class="card-body">
+            <h3 class="card-title text-center mb-3 highlight-title">Payment History</h3>
+            <div class="table-responsive">
+              <table class="table table-bordered payment-history-table">
+                <!-- Table headers and rows for payment history go here -->
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="container mt-4">
+    <h2 class="text-center mb-4">Top 50 Coins</h2>
+    <div class="table-responsive" style="max-height: 400px; overflow-y: auto;">
+      <table class="table table-bordered coin-table">
+        <thead class="thead-dark">
+          <tr>
+            <th>Coin Ranking</th>
+            <th>Logo</th>
+            <th>Name</th>
+            <th>Symbol</th>
+            <th>Price</th>
+            <th>Buy/Sell</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for coin in coins %}
+            <tr>
+              <td>{{ forloop.counter }}</td>
+              <td><img src="{{ coin.iconUrl }}" alt="{{ coin.name }} Logo" class="coin-logo"></td>
+              <td>{{ coin.name }}</td>
+              <td>{{ coin.symbol }}</td>
+              <td>${{ coin.price }}</td>
+              <td>
+                <!-- Add Buy/Sell buttons with appropriate links -->
+                <a href="{% url 'buy' coin.symbol %}" class="btn btn-success btn-sm">Buy</a>
+                <a href="{% url 'sell' coin.symbol %}" class="btn btn-danger btn-sm">Sell</a>
+              </td>
+            </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </div>
+{% endblock %}
+
+{% block styles %}
+  <link rel="stylesheet" type="text/css" href="{% static 'myApp/style.css' %}">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <style>
+    /* Add custom styles here */
+    .coin-table th, .coin-table td {
+      text-align: center;
+    }
+
+    .coin-logo {
+      max-width: 40px;
+      max-height: 40px;
+    }
+
+    .card {
+      border: 2px solid #17a2b8;
+      margin-bottom: 20px;
+    }
+
+    .card-title {
+      color: #17a2b8;
+      font-size: 1.5rem;
+    }
+
+    .highlight-title {
+      color: #fff;
+      background-color: #17a2b8;
+      padding: 10px;
+      border-radius: 5px;
+    }
+  </style>
+{% endblock %}
