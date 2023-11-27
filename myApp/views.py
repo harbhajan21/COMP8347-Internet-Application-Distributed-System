@@ -1,9 +1,11 @@
 import json
+from datetime import datetime
 from pydoc import stripid
 
 from alpha_vantage.timeseries import TimeSeries
 from django.contrib.auth import login
 import requests
+from django.core.exceptions import ValidationError
 from django.shortcuts import render, redirect
 from django.shortcuts import render, redirect, get_object_or_404
 from forms import SignupForm
@@ -12,7 +14,7 @@ from django.contrib.auth.views import PasswordResetView
 from django.shortcuts import render, redirect
 from forms import SigninForm
 from django.contrib.auth import logout
-from .models import UserProfile
+from .models import UserProfile, Payment
 from django.contrib import messages
 from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
@@ -148,13 +150,44 @@ def payment_page(request):
 
 
 def payment_confirm(request):
+    success = False
     if request.method == 'POST':
-        user = get_object_or_404(UserProfile, user=request.user)
-        user.save()
-        messages.success(request, 'Payment has been completed successfully.')
-        return render(request, 'registration/homepage.html')
+        amount = request.POST.get('amount')
+        card_number = request.POST.get('card_number')
+        user_name = request.POST.get('user_name')
+        expiry_date = request.POST.get('expiry_date')
+        cvv = request.POST.get('cvv')
+        payment_option = request.POST.get('payment_option')
 
-    return render(request, 'payment/payment-page.html')
+        if len(amount) > 10 or not amount.isdigit():
+            raise ValidationError("Invalid Amount Value")
+        # Validate card number, CVV, and other fields if necessary
+        if len(card_number) != 16 or not card_number.isdigit():
+            raise ValidationError("Invalid card number")
+        if len(cvv) not in [3, 4] or not cvv.isdigit():
+            raise ValidationError("Invalid CVV")
+
+        # Convert expiry date to a date object
+        try:
+            expiry_date = datetime.strptime(expiry_date, '%m/%y').date()
+        except ValueError:
+            raise ValidationError("Invalid expiry date format, use MM/YY")
+
+        # Create and save the payment transaction
+        payment = Payment(
+            amount=amount,
+            card_number=card_number,
+            user_name=user_name,
+            expiry_date=expiry_date,
+            cvv=cvv,
+            payment_option=payment_option
+        )
+        payment.save()
+
+        # Redirect or show a success message
+        success = True   # Replace 'success_url' with your URL name
+
+    return render(request, 'payment/payment-page.html', {'success': success})
 
 
 def successful_payment(request):

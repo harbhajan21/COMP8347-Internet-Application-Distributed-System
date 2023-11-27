@@ -108,7 +108,7 @@ footer {
     background-color: #3f51b5;
     color: #fff;
     text-align: center;
-    padding: 10px;
+    padding: 10px 0;
 }
 
 .currency-rates, .market-trends, .payment {
@@ -450,3 +450,55 @@ button {
 
 
 /*trading and base html end*/
+
+/*paymetn page*/
+
+.payment-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 50px;
+}
+
+.payment-form {
+    max-width: 400px;
+    width: 100%;
+    background-color: #fff;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    padding: 20px;
+    text-align: center;
+}
+
+.payment-form label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 5px;
+    text-align: left; /* Adjusted to align the labels to the left */
+}
+
+.payment-form input,
+.payment-form select {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+    margin-bottom: 15px;
+    box-sizing: border-box; /* Added to include padding and border in element's total width */
+}
+
+.payment-form button {
+    background-color: #007BFF;
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 3px;
+    cursor: pointer;
+}
+
+.payment-form button:hover {
+    background-color: #0056b3;
+}
+
+
+/*paymetn page end*/

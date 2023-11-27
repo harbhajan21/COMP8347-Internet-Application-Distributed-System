@@ -10,3 +10,13 @@ class UserProfile(models.Model):
 
 
 # Create your models here.
+class Payment(models.Model):
+    amount = models.CharField(max_length=10)
+    card_number = models.CharField(max_length=16)
+    user_name = models.CharField(max_length=100)
+    expiry_date = models.DateField()
+    cvv = models.CharField(max_length=4)
+    payment_option = models.CharField(max_length=10)
+
+    def __str__(self):
+        return f"Payment by {self.user_name}"
