@@ -2,28 +2,32 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+<style>
+    header h1{
+        color:white;
+    }
+</style>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    {% include 'head-footer/header.html' %}
     {% block head %}
         <link rel="stylesheet" type="text/css" href="{% static 'myApp/style.css' %}">
+        <title>Windsor Forex Trading</title>
     {% endblock head %}
 </head>
 <body>
-    <!-- Navbar -->
-    <div class="navbar">
-        <h1>Windsor Forex Trading Platform</h1>
-    </div>
-    <!-- End Navbar -->
+    <header>
+        <h1>Windsor Forex Trading Platform's Portal</h1>
+    </header>
 
     <!-- Body -->
     <div class="container-fluid">
         {% block content %}
-
         {% endblock content %}
     </div>
     <!-- End Body -->
 
-    {% include 'head-footer/footer.html' %}
+    <footer>
+        <p>&copy; 2023 Windsor Forex Trading Platform. All rights reserved.</p>
+    </footer>
 </body>
 </html>

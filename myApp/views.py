@@ -89,43 +89,46 @@ def signout_view(request):
 # def signed_out(request):
 #     return render(request, 'registration/signed_out.html')
 
+
 def trading_view(request):
     # Your API key from Alpha Vantage
-    api_key = 'F8FLNKTMJ6DRQNE6'
-    interval = '60min'  # Set the desired interval
-    url = f'https://www.alphavantage.co/query?function=CRYPTO_INTRADAY&symbol=ETH&market=USD&interval=50min&apikey={api_key}'
-    r = requests.get(url)
-    data = r.json()
+    # api_key = 'F8FLNKTMJ6DRQNE6'
+    # interval = '60min'  # Set the desired interval
+    #
+    # url = f'https://www.alphavantage.co/query?function=TIME_SERIES_INTRADAY&symbol=IBM&interval={interval}&apikey={api_key}'
+    # response = requests.get(url)
+    # data = response.json()
+    # print("Api response:", data)
+    #
+    # # The key typically includes the interval, e.g., "Time Series Crypto (5min)"
+    # # Check the exact structure of your response and replace the key accordingly
+    # time_series_key = f"Time Series ({interval})"
+    # print(time_series_key)
+    #
+    # if time_series_key in data:
+    #     time_series_data = data[time_series_key]
+    #
+    #     # Extract the closing prices and timestamps
+    #     chart_data = [float(value['4. close']) for (key, value) in time_series_data.items()]
+    #     chart_labels = [key for (key, value) in time_series_data.items()]
+    #
+    #     context = {
+    #         'data': json.dumps(chart_data),
+    #         'labels': json.dumps(chart_labels),
+    #     }
+    # else:
+    #     # Handle the error or set default values
+    #     context = {
+    #         'data': json.dumps([]),
+    #         'labels': json.dumps([]),
+    #         'error': 'Time series data not found in the API response',
+    #     }
 
-    print(data)
-    url = f'https://www.alphavantage.co/query?function=TIME_SERIES_INTRADAY&symbol=IBM&interval=60min&apikey={api_key}'
-    response = requests.get(url)
-    data = response.json()
-    print("Api response:", data)
-
-    # The key typically includes the interval, e.g., "Time Series Crypto (5min)"
-    # Check the exact structure of your response and replace the key accordingly
-    time_series_key = f"Time Series ({interval})"
-    print(time_series_key)
-
-    if time_series_key in data:
-        time_series_data = data[time_series_key]
-
-        # Extract the closing prices and timestamps
-        chart_data = [float(value['4. close']) for (key, value) in time_series_data.items()]
-        chart_labels = [key for (key, value) in time_series_data.items()]
-
-        context = {
-            'data': json.dumps(chart_data),
-            'labels': json.dumps(chart_labels),
-        }
-    else:
-        # Handle the error or set default values
-        context = {
-            'data': json.dumps([]),
-            'labels': json.dumps([]),
-            'error': 'Time series data not found in the API response',
-        }
+    context = {
+        'data': json.dumps([]),
+        'labels': json.dumps([]),
+        'error': 'Time series data not found'
+    }
     return render(request, 'registration/trading.html', context)
 
 
