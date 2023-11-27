@@ -13,6 +13,10 @@ from django.contrib import messages
 from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
 from .forms import CustomUserCreationForm
+from django.shortcuts import render
+from django.core.mail import send_mail
+from django.http import HttpResponseRedirect
+from django.conf import settings
 
 
 def homepage(request):
@@ -126,39 +130,7 @@ def cancelled_payment(request):
 def place_order(request):
     return render(request, homepage)
 
-from django.shortcuts import render
-from django.core.mail import send_mail
-from django.http import HttpResponseRedirect
-"""
-def contact(request):
-    if request.method == 'POST':
-        name = request.POST.get('name')
-        email = request.POST.get('email')
-        subject = request.POST.get('subject')
-        message = request.POST.get('message')
 
-        # Send email
-        send_mail(
-            f'Contact Form - {subject}',
-            f'Name: {name}\nEmail: {email}\n\nMessage:\n{message}',
-            'rahul.manjinder@yahoo.com',  # Replace with your email
-            ['rahul.manjinder@gmail.com'],  # Replace with the recipient's email
-            fail_silently=False,
-        )
-
-        # Redirect after successful form submission
-        return HttpResponseRedirect('/success/')
-
-    return render(request, 'registration/contact.html')
-
-"""
-
-# views.py
-
-from django.shortcuts import render
-from django.core.mail import send_mail
-from django.http import HttpResponseRedirect
-from django.conf import settings
 
 def contact(request):
     if request.method == 'POST':
