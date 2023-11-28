@@ -1,0 +1,36 @@
+{% load static %}
+
+<header>
+    <nav>
+        <ul>
+            <li><a href="#">Home</a></li>
+            <li><a href="#">Market Trends</a></li>
+            <li><a href="{% url 'dashboard' %}">Currency Rates</a></li>
+            <li><a href="#">Trading Patterns</a></li>
+            <li><a href="{% url 'account_details' %}">Account</a></li>
+            <li><a href="{% url 'signout' %}">Sign Out</a></li>
+        </ul>
+    </nav>
+</header>
+
+<footer>
+    <p>&copy; 2023 Windsor Forex Trading Platform. All rights reserved.</p>
+</footer>
+
+<!-- head-footer/header-footer.html or your stylesheet -->
+
+<style>
+    body {
+        margin-bottom: 60px; /* Adjust the value as needed */
+    }
+
+    footer {
+        position: fixed;
+        bottom: 0;
+        width: 100%;
+        background-color: #f1f1f1;
+        text-align: center;
+        padding: 10px 0;
+    }
+</style>
+

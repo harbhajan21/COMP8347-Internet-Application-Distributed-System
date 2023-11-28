@@ -9,12 +9,27 @@
 </style>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- Add this in the head section of your base.html -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    {% include 'head-footer/header.html' %}
     {% block head %}
         <link rel="stylesheet" type="text/css" href="{% static 'myApp/style.css' %}">
         <title>Windsor Forex Trading</title>
     {% endblock head %}
 </head>
 <body>
+    <!-- Navbar -->
+    <div class="navbar">
+{#        <h1>Windsor Forex Trading Platform</h1>#}
+        <ul class="navbar-nav ml-auto">
+      {% if request.user.is_authenticated %}
+      <li class="nav-item">
+        <p class="user-name">Welcome, {{ request.user.username }}</p>
+      </li>
+      {% endif %}
+    </ul>
+    </div>
+    <!-- End Navbar -->
     <header>
         <h1>Windsor Forex Trading Platform's Portal</h1>
     </header>
