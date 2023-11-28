@@ -30,12 +30,14 @@ urlpatterns = [
     path('homepage/', views.homepage_view, name='homepage_view'),
     path('signout/', views.signout_view, name='signout'),
     path('trading/', views.trading_view, name='trading'),
-    path('livecurrencyrates/', views.livecurrencyrates_view, name='livecurrencyrates'),
+    #path('livecurrencyrates/', views.livecurrencyrates_view, name='livecurrencyrates'),
     path('markettrends/', views.markettrends_view, name='markettrends'),
     path('payment/', views.payment_page, name='payment_page'),
     path('payment-confirm/', views.payment_confirm, name='payment_confirm'),
     # path('paypal/', include('paypal.standard.ipn.urls')),
     path('contact/', views.contact, name='contact'),
+    path('livecurrencyrates/', views.crypto_dashboard, name='crypto_dashboard'),
+    path('about-us/', views.about_us, name='about_us'),
 ]
 
 if settings.DEBUG:

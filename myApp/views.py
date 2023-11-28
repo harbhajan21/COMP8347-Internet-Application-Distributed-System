@@ -68,6 +68,9 @@ def signin_view(request):
 def success_view(request):
     return render(request, 'registration/success.html')  # Replace 'success.html' with your success page template
 
+def success_email_view(request):
+    return render(request, 'registration/success_email.html')  # Replace 'success.html' with your success page template
+
 
 def homepage_view(request):
     return render(request, 'registration/homepage.html')  # 'homepage.html' is the template for your homepage
@@ -159,7 +162,7 @@ from django.shortcuts import render
 from django.core.mail import send_mail
 from django.http import HttpResponseRedirect
 from django.conf import settings
-
+from django.urls import reverse
 def contact(request):
     if request.method == 'POST':
         name = request.POST.get('name')
@@ -192,7 +195,61 @@ def contact(request):
         )
 
         # Redirect after successful form submission
-        return HttpResponseRedirect('/success/')
+        return HttpResponseRedirect('success')
 
     return render(request, 'registration/contact.html')
 
+"""
+# crypto_rates/views.py
+from django.shortcuts import render
+import requests
+
+def get_crypto_data():
+    api_key = 'bea52cdee1bf044cf2c1d33fa6fd1a62'
+    endpoint = f'http://api.coinlayer.com/list?access_key={api_key}'
+    response = requests.get(endpoint)
+    return response.json()
+
+def crypto_dashboard(request):
+    crypto_symbols = ['ETH', 'BTC', 'USDT', 'BNB', 'XRP', 'USDC', 'SOL', 'DOGE', 'TRX', 'LINK', 'AVAX', 'MATIC', 'DOT',
+                      'DAI', 'LTC', 'SHIB', 'BCH', 'OKB', 'TUSD', 'XLM']
+
+    crypto_data = get_crypto_data()
+    
+    # Assuming `crypto_data` is the JSON response from the CoinLayer API
+    print(crypto_data)
+
+    # Modify the following line based on the structure of the JSON response
+    selected_crypto_data = {symbol: crypto_data[symbol] for symbol in crypto_symbols}
+
+    #selected_crypto_data = {symbol: crypto_data['rates'][symbol] for symbol in crypto_symbols}
+
+    context = {
+        'crypto_data': selected_crypto_data,
+    }
+
+    return render(request, 'crypto-rates/crypto_dashboard.html', context)
+"""
+
+from django.shortcuts import render
+import requests
+
+def crypto_dashboard(request):
+    # CoinLayer API key
+    api_key = "bea52cdee1bf044cf2c1d33fa6fd1a62"
+
+    # Cryptocurrency symbols to display
+    crypto_symbols = ['ETH', 'BTC', 'USDT', 'BNB', 'XRP', 'USDC', 'SOL', 'DOGE', 'TRX', 'LINK', 'AVAX', 'MATIC', 'DOT', 'DAI', 'LTC', 'SHIB', 'BCH', 'OKB', 'TUSD', 'XLM']
+
+    # Get live cryptocurrency rates from CoinLayer API
+    response = requests.get(f'http://api.coinlayer.com/list?access_key={api_key}')
+    crypto_data = response.json()
+
+    # Get data for selected cryptocurrencies
+    selected_crypto_data = crypto_data.get('crypto', {})
+
+    # Render the template with cryptocurrency data
+    return render(request, 'crypto-rates/crypto_dashboard.html', {'crypto_data': selected_crypto_data})
+
+def about_us(request):
+    return render(request, 'static-pages/about_us.html')

@@ -1,0 +1,79 @@
+<!-- crypto_rates/templates/crypto_rates/crypto_dashboard.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Crypto Dashboard</title>
+    <style>
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        th, td {
+            padding: 12px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+        th {
+            cursor: pointer;
+        }
+        img {
+            max-width: 30px;
+            max-height: 30px;
+            margin-right: 10px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Crypto Dashboard</h1>
+    <div>
+        <label for="modeSwitch">Mode:</label>
+        <input type="checkbox" id="modeSwitch" onclick="toggleDarkMode()">
+    </div>
+    <table id="cryptoTable">
+        <thead>
+            <tr>
+                <th>Serial Number</th>
+                <th>Cryptocurrency Name</th>
+                <th>Cryptocurrency Logo</th>
+                <th>Rate</th>
+                <th>Trends</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for symbol, rate in crypto_data.items %}
+                <tr onmouseover="highlightRow(this)" onmouseout="unhighlightRow(this)">
+                    <td>{{ forloop.counter }}</td>
+                    <td>{{ symbol }}</td>
+                    <td>{{ symbol|lower }}_logo.png</td>
+                    <td>{{ rate }}</td>
+                    <td><!-- Add trends information here --></td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <script>
+        // crypto_rates/static/crypto_rates/js/crypto_dashboard.js
+
+        // Function to toggle dark mode
+        function toggleDarkMode() {
+            const body = document.body;
+            body.classList.toggle('dark-mode');
+        }
+
+        // Function to highlight the row
+        function highlightRow(row) {
+            row.style.backgroundColor = '#f0f0f0'; // Change the background color to a light shade
+        }
+
+        // Function to unhighlight the row
+        function unhighlightRow(row) {
+            row.style.backgroundColor = ''; // Remove the custom background color
+        }
+    </script>
+</body>
+</html>

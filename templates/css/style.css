@@ -1,0 +1,309 @@
+/* Reset default styles and add some basic styling */
+
+/*use Style.css this file will be removed later*/
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Heading */
+h2 {
+    font-size: 20px;
+    margin-bottom: 20px;
+    color: #333;
+}
+
+h1 {
+    font-size: 20px;
+    margin-bottom: 20px;
+    color: #333;
+}
+
+p {
+    font-size: 15px;
+    margin-bottom: 15px;
+    color: #333;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f0f0f0;
+    margin: 0;
+}
+
+/* Style the header with a navigation menu */
+header {
+    background-color: #3f51b5;
+    color: #fff;
+    padding: 10px 0;
+    text-align: center;
+}
+
+nav ul {
+    list-style-type: none;
+}
+
+nav li {
+    display: inline;
+    margin-right: 20px;
+}
+
+nav a {
+    color: #fff;
+    text-decoration: none;
+}
+
+/* Style the main content section */
+.main-content {
+    padding: 20px;
+}
+
+.welcome-message {
+    text-align: center;
+    padding: 25px;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    margin-bottom: 50px;
+}
+
+.trading-platform {
+    text-align: center;
+    padding: 25px;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    margin-bottom: 50px;
+}
+
+.currency-rates {
+    display: inline-block;
+    text-align: left;
+    padding: 10px;
+}
+
+.market-trends {
+    display: inline-block;
+    text-align: right;
+    padding: 10px 200px;
+}
+
+.btn {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #3f51b5;
+    color: #fff;
+    text-decoration: double;
+    border-radius: 20px;
+}
+
+/* Style the footer */
+footer {
+    background-color: #3f51b5;
+    color: #fff;
+    text-align: center;
+    padding: 10px;
+}
+
+.currency-rates, .market-trends, .payment {
+    /* Add any additional styling for individual sections if needed */
+    margin: 0 10px; /* Adjust the margin based on your preference */
+}
+
+.sections-container {
+    display: flex;
+    justify-content: space-around; /* Adjust this based on your layout preference */
+    align-items: center; /* Adjust this based on your layout preference */
+}
+
+.contact-section {
+    background-color: white;
+    padding: 20px;
+    border-radius: 10px;
+    text-align: center;
+    color: white;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    margin-bottom: 25px;
+    box-sizing: border-box;
+}
+.contact-section h2 {
+    font-family: Arial, sans-serif;
+    border-radius: 10px;
+    font-size: 20px;
+    font-weight: bold;
+    margin-bottom: 20px;
+}
+.contact-section p {
+    font-family: Arial, sans-serif;
+    border-radius: 10px;
+    font-size: 15px;
+}
+
+/* Add styles for other sections like currency rates and market trends as needed */
+
+
+/*start Old toggle css can be removed later*/
+
+
+/*.toggle-section {*/
+/*    background-color: white;*/
+/*    padding: 20px;*/
+/*    border-radius: 10px;*/
+/*    text-align: center;*/
+/*    color: white;*/
+/*    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);*/
+/*    margin-bottom: 25px;*/
+/*    box-sizing: border-box;*/
+/*    display: flex;*/
+/*    justify-content: flex-end;*/
+/*    align-items: flex-start;*/
+
+/*}*/
+
+/*#toggle-container {*/
+/*    margin-top: 10px;*/
+/*    margin-right: 10px;*/
+/*}*/
+
+/*#toggle {*/
+/*    display: none;*/
+/*}*/
+
+/*#toggle-label {*/
+/*    background-color: #3498db;*/
+/*    color: #fff;*/
+/*    padding: 10px;*/
+/*    cursor: pointer;*/
+/*    user-select: none;*/
+/*}*/
+
+/*This add another div in the toggle div*/
+/*#content {*/
+/*    display: none; !* Initially hide the content *!*/
+/*    padding: 10px;*/
+/*    border: 1px solid #ccc;*/
+/*    margin-top: 10px;*/
+/*}*/
+
+/*#toggle:checked + #toggle-label + #content {*/
+/*    display: block;*/
+/*}*/
+
+/* End Old toggle css can be removed later*/
+
+
+
+/*toggle switch button*/
+
+/* Add this to your static/css/styles.css or within a <style> tag in the head of your HTML */
+
+/* Styles for the toggle switch */
+/* Container for the whole toggle switch, ensures the background is white and content is aligned */
+/*.toggle-container {*/
+/*  display: flex;*/
+/*  align-items: center;*/
+/*  background-color: white;*/
+/*  padding: 25px;*/
+/*  border-radius: 10px;*/
+/*  justify-content: flex-end;*/
+/*  width: 100%;*/
+/*  margin-bottom: 20px;*/
+/*  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);*/
+/*}*/
+
+.toggle-highlights{
+  display: flex;
+    flex-direction: column;
+  align-items: flex-end;
+  background-color: white;
+  padding: 25px;
+  border-radius: 10px;
+  justify-content: flex-end;
+  width: 100%;
+  margin-bottom: 20px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+}
+
+#content {
+    margin-top: 10px; /* Add some margin for separation */
+    width: 100%;
+}
+
+.toggle-container {
+    margin-left: auto; /* Push the toggle-container to the right side */
+}
+
+.toggle-label-text {
+    margin-right: 10px; /* Add some margin for spacing between label and switch */
+}
+
+/* Styles for the text label, placed next to the toggle */
+.toggle-label-text {
+  margin-right: 10px; /* Adds some space between the text and the toggle */
+}
+
+/* The switch - the box around the slider */
+.toggle-switch {
+  position: relative;
+  display: inline-block;
+  width: 60px; /* Width of the outside box */
+  height: 25px; /* Height of the outside box */
+}
+
+/* Hide default HTML checkbox */
+.toggle-switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+/* The slider */
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ccc; /* Slider background when it's off */
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 21px; /* Height of the inside circle */
+  width: 21px; /* Width of the inside circle */
+  top:2px;
+  left: 4px;
+  bottom: 4px;
+  background-color: white;
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+
+input:checked + .slider {
+  background-color: #2196F3; /* Slider background when it's on */
+}
+
+input:focus + .slider {
+  box-shadow: 0 0 1px #2196F3;
+}
+
+input:checked + .slider:before {
+  -webkit-transform: translateX(26px); /* Distance to move the inside circle */
+  -ms-transform: translateX(26px);
+  transform: translateX(26px);
+}
+
+/* Rounded sliders */
+.slider.round {
+  border-radius: 34px;
+}
+
+.slider.round:before {
+  border-radius: 50%;
+}

@@ -1,0 +1,92 @@
+/* Reset default styles and add some basic styling */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f0f0f0;
+}
+
+.container {
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.header {
+    background-color: #3f51b5;
+    color: white;
+    text-align: center;
+    padding: 20px;
+}
+
+.navbar {
+    background-color: #f8f9fa;
+    padding: 10px;
+}
+
+.team-member {
+    text-align: center;
+    margin: 20px 0;
+}
+
+.footer {
+    background-color: #3f51b5;
+    color: white;
+    text-align: center;
+    padding: 10px;
+}
+
+/* Improved styling for the about section */
+.about-section {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.about-section h2 {
+    font-size: 24px;
+    color: #333;
+    margin-bottom: 15px;
+}
+
+.about-section p {
+    font-size: 16px;
+    color: #555;
+    line-height: 1.6;
+}
+
+/* Improved styling for the team section */
+.team-section {
+    text-align: center;
+}
+
+.team-section h3 {
+    font-size: 20px;
+    color: #333;
+    margin-bottom: 20px;
+}
+
+.team-member img {
+    max-width: 100%;
+    border-radius: 50%;
+    margin-bottom: 10px;
+}
+
+.team-member p {
+    font-size: 16px;
+    color: #555;
+}
+
+/* Add more styles as needed */
+
+/* Media query for responsive design */
+@media (max-width: 768px) {
+    .navbar {
+        padding: 10px 0;
+    }
+    .team-member img {
+        max-width: 80%;
+    }
+}

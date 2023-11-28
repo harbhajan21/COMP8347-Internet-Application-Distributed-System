@@ -61,3 +61,11 @@ button[type="submit"]:hover {
     background-color: #0056b3;
 }
 
+/* crypto_rates/static/crypto_rates/css/styles.css */
+
+.dark-mode {
+    background-color: #333; /* Dark background color */
+    color: #fff; /* Light text color */
+}
+
+/* Add more styles for dark mode as needed */
