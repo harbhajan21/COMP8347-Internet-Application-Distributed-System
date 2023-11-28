@@ -27,8 +27,22 @@ from .forms import CustomUserCreationForm
 
 
 def homepage(request):
-    # Add any necessary data or logic here
-    return render(request, 'registration/homepage.html')
+    api_key = 'coinrankingae631d1d5459748c6ec3a765f23471d6c612b840fc2d9938'
+    headers = {'x-access-token': api_key}
+    api_url = "https://api.coinranking.com/v2/coins"
+
+    response = requests.get(api_url)
+
+    if response.status_code == 200:
+        data = response.json().get("data", {}).get("coins", [])[:100]
+
+        # Assuming you have payment history data, replace the following line with your actual data retrieval logic
+        payment_history = Payment.objects.filter(user=request.user).order_by('-transaction_date')
+
+        return render(request, 'registration/homepage.html', {
+            'coins': data,
+        })
+    # return render(request, 'registration/homepage.html')
 
 
 # def signup_view(request):
