@@ -35,10 +35,8 @@
     <header>
         <nav>
             <ul>
-                <li><a href="#">Home</a></li>
-                <li><a href="#">Market Trends</a></li>
-                <li><a href="#">Currency Rates</a></li>
-                <li><a href="#">Trading Patterns</a></li>
+                <li><a href="{% url 'homepage' %}">Home</a></li>
+                <li><a href="{% url 'livecurrencyrates' %}">Live Currency Rate</a></li>
                 <li><a href="{% url 'signin' %}">Sign In</a></li>
                 <li><a href="{% url 'signup' %}">Sign Up</a></li>
             </ul>
@@ -56,16 +54,16 @@
             <a href="{% url 'signin' %}" class="btn">Sign In to Start Trading</a>  <!-- Replace 'signin' with your sign-in page URL -->
         </div>
     </section>
-    <section class="currency-rates">
+{#    <section class="currency-rates">#}
 {#        <h2>Live Currency Rates</h2>#}
-        <a href="{% url 'livecurrencyrates' %}" class="btn">Live Currency Rates</a>
-        <!-- Add a currency rates widget here -->
-    </section>
-    <section class="market-trends">
+{#        <a href="{% url 'livecurrencyrates' %}" class="btn">Live Currency Rates</a>#}
+{#        <!-- Add a currency rates widget here -->#}
+{#    </section>#}
+{#    <section class="market-trends">#}
 {#        <h2>Market Trends</h2>#}
-        <a href="{% url 'markettrends' %}" class="btn">Market Trends</a>
-        <!-- Display market trends and charts here -->
-    </section>
+{#        <a href="{% url 'markettrends' %}" class="btn">Market Trends</a>#}
+{#        <!-- Display market trends and charts here -->#}
+{#    </section>#}
     <!-- Contact Section -->
     <div class="contact-section">
         <h2>Contact Us</h2>

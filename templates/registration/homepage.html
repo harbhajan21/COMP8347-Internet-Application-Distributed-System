@@ -111,15 +111,26 @@
     <header>
         <nav>
             <ul>
-                <li><a href="#">Home</a></li>
-                <li><a href="#">Market Trends</a></li>
-                <li><a href="{% url 'dashboard' %}">Currency Rates</a></li>
-                <li><a href="#">Trading Patterns</a></li>
+                <li><a href="{% url 'homepage' %}">Home</a></li>
+                <li><a href="{% url 'livecurrencyrates' %}">Live Currency Rate</a></li>
+{#                <li><a href="{% url 'dashboard' %}">Currency Rates</a></li>#}
+                <li><a href="{% url 'payment_page' %}">Payment</a></li>
                 <li><a href="{% url 'account_details' %}">Account</a></li>
                 <li><a href="{% url 'signout' %}">Sign Out</a></li>
             </ul>
         </nav>
     </header>
+
+    <div class="navbar">
+{#        <h1>Windsor Forex Trading Platform</h1>#}
+        <ul class="navbar-nav ml-auto">
+            {% if request.user.is_authenticated %}
+                <li class="nav-item">
+                    <p class="user-name">Welcome, {{ request.user.username }}</p>
+                </li>
+            {% endif %}
+        </ul>
+    </div>
 
     <section class="main-content">
 
@@ -187,20 +198,20 @@
         </div>
     </section>
 
-    <div class="sections-container">
-        <section class="currency-rates">
-            <a href="{% url 'livecurrencyrates' %}" class="btn">Live Currency Rates</a>
-            <!-- Add a currency rates widget here -->
-        </section>
-        <section class="market-trends">
-            <a href="{% url 'markettrends' %}" class="btn">Market Trends</a>
-            <!-- Display market trends and charts here -->
-        </section>
-        <section class="payment">
-            <a href="{% url 'payment_page' %}" class="btn">Payment</a>
-            <!-- Display payment here -->
-        </section>
-    </div>
+{#    <div class="sections-container">#}
+{#        <section class="currency-rates">#}
+{#            <a href="{% url 'livecurrencyrates' %}" class="btn">Live Currency Rates</a>#}
+{#            <!-- Add a currency rates widget here -->#}
+{#        </section>#}
+{#        <section class="market-trends">#}
+{#            <a href="{% url 'markettrends' %}" class="btn">Market Trends</a>#}
+{#            <!-- Display market trends and charts here -->#}
+{#        </section>#}
+{#        <section class="payment">#}
+{#            <a href="{% url 'payment_page' %}" class="btn">Payment</a>#}
+{#            <!-- Display payment here -->#}
+{#        </section>#}
+{#    </div>#}
 
     <!-- Contact Section -->
     <div class="contact-section">
