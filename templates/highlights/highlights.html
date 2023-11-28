@@ -1,0 +1,184 @@
+{% load static %}
+{% block content %}
+    <div class="container mt-4">
+        <div class="row">
+            <!-- Left Section: Top 5 Coins -->
+            <div class="col-md-4">
+                <div class="card h-100">
+                    <div class="card-body">
+                        <h3 class="card-title text-center mb-3 highlight-title">Top 5 Coins</h3>
+                        <div class="table-responsive">
+                            <table class="table table-bordered coin-table">
+                                <thead>
+                                <tr>
+                                    <th>Rank</th>
+                                    <th>Logo</th>
+                                    <th>Symbol</th>
+                                    <th>Price</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                {% for coin in top_5_coins %}
+                                    <tr>
+                                        <td>{{ forloop.counter }}</td>
+                                        <td><img src="{{ coin.iconUrl }}" alt="{{ coin.name }} Logo"></td>
+                                        <td>{{ coin.symbol }}</td>
+                                        <td>${{ coin.price|floatformat:2 }}</td>
+                                    </tr>
+                                {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Middle Section: Bottom 5 Coins -->
+            <div class="col-md-4">
+                <div class="card h-100">
+                    <div class="card-body">
+                        <h3 class="card-title text-center mb-3 highlight-title">Bottom 5 Coins</h3>
+                        <div class="table-responsive">
+                            <table class="table table-bordered coin-table">
+                                <thead>
+                                <tr>
+                                    <th>Rank</th>
+                                    <th>Logo</th>
+                                    <th>Symbol</th>
+                                    <th>Price</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                {% for coin in bottom_5_coins %}
+                                    <tr>
+                                        <td>{{ forloop.counter }}</td>
+                                        <td><img src="{{ coin.iconUrl }}" alt="{{ coin.name }} Logo"></td>
+                                        <td>{{ coin.symbol }}</td>
+                                        <td>${{ coin.price|floatformat:2 }}</td>
+                                    </tr>
+                                {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Right Section: Payment History -->
+            <div class="col-md-4">
+                <div class="card h-100">
+                    <div class="card-body">
+                        <h3 class="card-title text-center mb-3 highlight-title">Payment History</h3>
+                        <div class="table-responsive">
+                            <table class="table table-bordered coin-table">
+                                <thead>
+                                <tr>
+                                    <th>Amount</th>
+                                    <th>Transaction Time</th>
+                                    <th>Balance</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                {% for payment in payment_history %}
+                                    <tr>
+                                        <td>{{ payment.amount }}</td>
+                                        <td>{{ payment.transaction_date|date:"Y-m-d H:i" }}</td>
+                                        <td>{{ payment.account_balance }}</td>
+                                    </tr>
+                                {% empty %}
+                                    <tr>
+                                        <td colspan="3">No payment history found.</td>
+                                    </tr>
+                                {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block styles %}
+    {#  <link rel="stylesheet" type="text/css" href="{% static 'myApp/style.css' %}">#}
+    {#  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">#}
+    <style>
+        .row {
+            display: flex;
+            margin-right: -15px;
+            margin-left: -15px;
+        }
+
+
+        .row > [class*='col-'] {
+            padding-right: 15px;
+            padding-left: 15px;
+        }
+
+        .row {
+            display: flex;
+            margin: 0;
+        }
+
+        .col-md-4 {
+            flex: 1;
+            padding: 0 15px;
+        }
+
+        .card {
+            margin: 0;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .card-body {
+            flex-grow: 1; /* Allow card-body to fill the space */
+        }
+
+
+        .card-title {
+            background-color: #17a2b8;
+            color: #fff;
+            padding: 10px;
+            border-top-left-radius: 5px;
+            border-top-right-radius: 5px;
+            margin-top: 0;
+            margin-bottom: 0;
+        }
+
+        .table {
+            width: 100%;
+            margin-bottom: 0;
+            border-collapse: collapse;
+        }
+
+        .table th, .table td {
+            text-align: center;
+            border: 1px solid #ddd;
+            padding: 8px;
+        }
+
+        .table thead {
+            background-color: #f2f2f2;
+        }
+
+        .table tbody tr:nth-child(odd) {
+            background-color: #f9f9f9;
+        }
+
+        .table tbody tr:nth-child(even) {
+            background-color: #ffffff;
+        }
+    </style>
+{% endblock %}
+{##}
+{#{% block javascript %}#}
+{#  <script>#}
+{#      const link = document.createElement('link');#}
+{#      link.rel = 'stylesheet';#}
+{#link.href = 'https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css';#}
+{#      document.head.appendChild(link);#}
+{#  </script>#}
+{#{% endblock %}#}

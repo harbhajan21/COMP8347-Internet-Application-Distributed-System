@@ -134,7 +134,7 @@
             {# Adding Highlights Starts #}
             <div id="content" style="display:none;">
                 <!-- Content to be toggled -->
-                <p>This is the content that will be shown or hidden when the toggle is switched.</p>
+                {% include "highlights/highlights.html" %}
             </div>
             {# Adding Highlights Ends #}
         </div>
@@ -224,6 +224,11 @@
             if (document.getElementById('highlightToggle').checked) {
                 console.log('Showing content'); // Debugging line
                 content.style.display = 'block';
+                fetch('{% url "dashboard" %}').then(response => response.text())
+            .then(html => {
+                content.innerHTML = html;
+            })
+            .catch(error => console.error('Error loading dashboard:', error));
             } else {
                 console.log('Hiding content'); // Debugging line
                 content.style.display = 'none';

@@ -282,7 +282,7 @@ def dashboard(request):
         # Assuming you have payment history data, replace the following line with your actual data retrieval logic
         payment_history = Payment.objects.filter(user=request.user).order_by('-transaction_date')
 
-        return render(request, 'highlights/dashboard.html', {
+        return render(request, 'highlights/highlights.html', {
             'top_5_coins': top_5_coins,
             'bottom_5_coins': bottom_5_coins,
             'payment_history': payment_history,
