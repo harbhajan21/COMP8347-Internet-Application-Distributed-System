@@ -231,6 +231,7 @@ def crypto_dashboard(request):
     return render(request, 'crypto-rates/crypto_dashboard.html', context)
 """
 
+# views.py
 from django.shortcuts import render
 import requests
 
@@ -248,8 +249,26 @@ def crypto_dashboard(request):
     # Get data for selected cryptocurrencies
     selected_crypto_data = crypto_data.get('crypto', {})
 
-    # Render the template with cryptocurrency data
-    return render(request, 'crypto-rates/crypto_dashboard.html', {'crypto_data': selected_crypto_data})
+    # Prepare a list of dictionaries for rendering in the template
+    crypto_list = []
+    for symbol, data in selected_crypto_data.items():
+        print("Symbol:- ",symbol)
+        print("Data:- ", data)
+        #'cryptocurrency_logo': data.get('icon_url', ''),
+        
+        crypto_dict = {
+            'serial_number': len(crypto_list) + 1,
+            'cryptocurrency_name': data.get('name', ''),
+            'cryptocurrency_logo': data.get('icon_url', ''),
+            # 'rate': data.get('rate', ''),
+            'max_supply': data.get('max_supply', ''),  # Add max_supply to the dictionary
+            'name_full': data.get('name_full', ''),    # Add name_full to the dictionary
+            'symbol': data.get('symbol', ''),          # Add symbol to the dictionary
+        }
+        crypto_list.append(crypto_dict)
+
+    # Render the template with the list of dictionaries
+    return render(request, 'crypto-rates/crypto_dashboard.html', {'crypto_list': crypto_list})
 
 def about_us(request):
     return render(request, 'static-pages/about_us.html')
