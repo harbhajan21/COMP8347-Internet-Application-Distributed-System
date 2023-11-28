@@ -1,5 +1,11 @@
+import json
+from datetime import datetime
 from pydoc import stripid
+
+from alpha_vantage.timeseries import TimeSeries
 from django.contrib.auth import login
+import requests
+from django.core.exceptions import ValidationError
 from django.shortcuts import render, redirect
 from django.shortcuts import render, redirect, get_object_or_404
 from forms import SignupForm
@@ -8,7 +14,7 @@ from django.contrib.auth.views import PasswordResetView
 from django.shortcuts import render, redirect
 from forms import SigninForm
 from django.contrib.auth import logout
-from .models import UserProfile
+from .models import UserProfile, Payment
 from django.contrib import messages
 from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
@@ -85,9 +91,47 @@ def signout_view(request):
 # def signed_out(request):
 #     return render(request, 'registration/signed_out.html')
 
+
 def trading_view(request):
-    # Your view logic here
-    return render(request, 'registration/trading.html')
+    # Your API key from Alpha Vantage
+    # api_key = 'F8FLNKTMJ6DRQNE6'
+    # interval = '60min'  # Set the desired interval
+    #
+    # url = f'https://www.alphavantage.co/query?function=TIME_SERIES_INTRADAY&symbol=IBM&interval={interval}&apikey={api_key}'
+    # response = requests.get(url)
+    # data = response.json()
+    # print("Api response:", data)
+    #
+    # # The key typically includes the interval, e.g., "Time Series Crypto (5min)"
+    # # Check the exact structure of your response and replace the key accordingly
+    # time_series_key = f"Time Series ({interval})"
+    # print(time_series_key)
+    #
+    # if time_series_key in data:
+    #     time_series_data = data[time_series_key]
+    #
+    #     # Extract the closing prices and timestamps
+    #     chart_data = [float(value['4. close']) for (key, value) in time_series_data.items()]
+    #     chart_labels = [key for (key, value) in time_series_data.items()]
+    #
+    #     context = {
+    #         'data': json.dumps(chart_data),
+    #         'labels': json.dumps(chart_labels),
+    #     }
+    # else:
+    #     # Handle the error or set default values
+    #     context = {
+    #         'data': json.dumps([]),
+    #         'labels': json.dumps([]),
+    #         'error': 'Time series data not found in the API response',
+    #     }
+
+    context = {
+        'data': json.dumps([]),
+        'labels': json.dumps([]),
+        'error': 'Time series data not found'
+    }
+    return render(request, 'registration/trading.html', context)
 
 
 def livecurrencyrates_view(request):
@@ -111,13 +155,44 @@ def payment_page(request):
 
 
 def payment_confirm(request):
+    success = False
     if request.method == 'POST':
-        user = get_object_or_404(UserProfile, user=request.user)
-        user.save()
-        messages.success(request, 'Payment has been completed successfully.')
-        return render(request, 'registration/homepage.html')
+        amount = request.POST.get('amount')
+        card_number = request.POST.get('card_number')
+        user_name = request.POST.get('user_name')
+        expiry_date = request.POST.get('expiry_date')
+        cvv = request.POST.get('cvv')
+        payment_option = request.POST.get('payment_option')
 
-    return render(request, 'payment/payment-page.html')
+        if len(amount) > 10 or not amount.isdigit():
+            raise ValidationError("Invalid Amount Value")
+        # Validate card number, CVV, and other fields if necessary
+        if len(card_number) != 16 or not card_number.isdigit():
+            raise ValidationError("Invalid card number")
+        if len(cvv) not in [3, 4] or not cvv.isdigit():
+            raise ValidationError("Invalid CVV")
+
+        # Convert expiry date to a date object
+        try:
+            expiry_date = datetime.strptime(expiry_date, '%m/%y').date()
+        except ValueError:
+            raise ValidationError("Invalid expiry date format, use MM/YY")
+
+        # Create and save the payment transaction
+        payment = Payment(
+            amount=amount,
+            card_number=card_number,
+            user_name=user_name,
+            expiry_date=expiry_date,
+            cvv=cvv,
+            payment_option=payment_option
+        )
+        payment.save()
+
+        # Redirect or show a success message
+        success = True   # Replace 'success_url' with your URL name
+
+    return render(request, 'payment/payment-page.html', {'success': success})
 
 
 def successful_payment(request):
@@ -192,3 +267,16 @@ def dashboard(request):
         })
 
 ## Functions for Highligths Ends
+def my_view(request):
+    # Get your data here, possibly from a database or an external service
+    data = [62000, 62500, 61500, 63000]  # Example data points
+    labels = ["3 PM", "6 PM", "9 PM", "12 AM"]  # Example labels
+
+    # Serialize your data and labels to JSON
+    data_json = json.dumps(data)
+    labels_json = json.dumps(labels)
+
+    return render(request, 'registration/trading.html', {
+        'data': data_json,
+        'labels': labels_json
+    })

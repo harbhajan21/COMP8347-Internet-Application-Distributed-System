@@ -7,8 +7,6 @@ class UserProfile(models.Model):
     first_name = models.CharField(max_length=30, blank=True, null=True)
     last_name = models.CharField(max_length=30, blank=True, null=True)
 
-
-# Create your models here
 class Crypto(models.Model):
     name = models.CharField(max_length=100)
     symbol = models.CharField(max_length=10)
@@ -27,3 +25,14 @@ class News(models.Model):
     link = models.URLField()
     def __str__(self):
         return self.title
+# Create your models here.
+class Payment(models.Model):
+    amount = models.CharField(max_length=10)
+    card_number = models.CharField(max_length=16)
+    user_name = models.CharField(max_length=100)
+    expiry_date = models.DateField()
+    cvv = models.CharField(max_length=4)
+    payment_option = models.CharField(max_length=10)
+
+    def __str__(self):
+        return f"Payment by {self.user_name}"

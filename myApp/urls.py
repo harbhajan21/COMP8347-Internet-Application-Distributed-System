@@ -21,9 +21,5 @@ urlpatterns = [
     path('place_order/',views.place_order, name='place_order'),
     path('account_details/', views.account_details, name='account_details'),
     # path('paypal/', include('paypal.standard.ipn.urls')),
-
-
-
-
 ]
 
