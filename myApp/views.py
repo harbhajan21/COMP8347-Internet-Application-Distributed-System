@@ -1,13 +1,18 @@
 import json
+from decimal import Decimal
 from datetime import datetime
 from pydoc import stripid
 
+from _decimal import InvalidOperation
 from alpha_vantage.timeseries import TimeSeries
 from django.contrib.auth import login
 import requests
 from django.core.exceptions import ValidationError
+from django.db.models import Max
 from django.shortcuts import render, redirect
 from django.shortcuts import render, redirect, get_object_or_404
+from django.utils import timezone
+
 from forms import SignupForm
 from django.contrib.auth import login, authenticate
 from django.contrib.auth.views import PasswordResetView
@@ -154,17 +159,21 @@ def payment_page(request):
     # return redirect('payment_page')
 
 
+@login_required
 def payment_confirm(request):
     success = False
     if request.method == 'POST':
-        amount = request.POST.get('amount')
+        try:
+            amount = Decimal(request.POST.get('amount'))
+        except InvalidOperation:
+            raise ValidationError("Invalid Amount Format")
         card_number = request.POST.get('card_number')
         user_name = request.POST.get('user_name')
         expiry_date = request.POST.get('expiry_date')
         cvv = request.POST.get('cvv')
         payment_option = request.POST.get('payment_option')
 
-        if len(amount) > 10 or not amount.isdigit():
+        if amount <= 0.00 or amount > 10000.00:
             raise ValidationError("Invalid Amount Value")
         # Validate card number, CVV, and other fields if necessary
         if len(card_number) != 16 or not card_number.isdigit():
@@ -178,21 +187,33 @@ def payment_confirm(request):
         except ValueError:
             raise ValidationError("Invalid expiry date format, use MM/YY")
 
+        latest_payment = Payment.objects.filter(user=request.user).aggregate(Max('account_balance'))
+        latest_balance = latest_payment['account_balance__max'] or Decimal(0)
+
+        print("decimal", latest_balance, "amount", amount)
+        new_balance = latest_balance + amount
+
         # Create and save the payment transaction
         payment = Payment(
+            user=request.user,  # Associate with the logged-in user
             amount=amount,
             card_number=card_number,
             user_name=user_name,
             expiry_date=expiry_date,
             cvv=cvv,
-            payment_option=payment_option
+            payment_option=payment_option,
+            transaction_date=timezone.now(),
+            account_balance=new_balance
         )
         payment.save()
 
-        # Redirect or show a success message
-        success = True   # Replace 'success_url' with your URL name
+        success = True
 
-    return render(request, 'payment/payment-page.html', {'success': success})
+    if success:
+        # Add a message and redirect to the homepage
+        return render(request, 'payment/payment-page.html', {'success': success, 'redirect_url': 'homepage.html'})
+    else:
+        return render(request, 'payment/payment-page.html', {'success': success})
 
 
 def successful_payment(request):
@@ -210,6 +231,7 @@ def place_order(request):
 ## Functions for Highligths Start
 from django.shortcuts import render
 import requests
+
 
 def dashboard(request):
     api_key = 'coinrankingae631d1d5459748c6ec3a765f23471d6c612b840fc2d9938'
@@ -237,11 +259,12 @@ def buy_coin(request, symbol):
     # Logic for buying the coin
     return render(request, 'highlights/buy_coin.html', {'symbol': symbol})
 
+
 def sell_coin(request, symbol):
     # Logic for selling the coin
     return render(request, 'highlights/sell_coin.html', {'symbol': symbol})
 
-
+@login_required
 def dashboard(request):
     api_key = 'coinrankingae631d1d5459748c6ec3a765f23471d6c612b840fc2d9938'
     headers = {'x-access-token': api_key}
@@ -257,14 +280,15 @@ def dashboard(request):
         bottom_5_coins = data[-5:]
 
         # Assuming you have payment history data, replace the following line with your actual data retrieval logic
-        payment_history_data = []
+        payment_history = Payment.objects.filter(user=request.user).order_by('-transaction_date')
 
         return render(request, 'highlights/dashboard.html', {
             'top_5_coins': top_5_coins,
             'bottom_5_coins': bottom_5_coins,
-            'payment_history': payment_history_data,
+            'payment_history': payment_history,
             'coins': data,
         })
+
 
 ## Functions for Highligths Ends
 def my_view(request):

@@ -1,0 +1,13 @@
+{% extends 'registration/base.html' %}
+
+{% block content %}
+{#    {% include 'head-footer/header-footer.html' %}#}
+
+    <h2>User Account Details</h2>
+    <p><strong>First Name:</strong> {{ user.first_name }}</p>
+    <p><strong>Last Name:</strong> {{ user.last_name }}</p>
+    <p><strong>Email:</strong> {{ user.username }}</p>
+    <!-- Add any other user details you want to display -->
+
+    <!-- You can also include an edit profile link or form here if needed -->
+{% endblock %}
