@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Crypto Dashboard</title>
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f8f9fa; /* Light gray background */
+            color: #343a40; /* Dark text color */
+            transition: background-color 0.5s ease;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        .header {
+            text-align: center;
+            background-color: #3498db; 
+            color: #fff; 
+            padding: 20px;
+        }
+
+        h1 {
+            text-align: center;
+        }
+
+        .footer {
+            text-align: center;
+            background-color: #3498db;
+            color: #fff;
+            padding: 10px;
+            margin-top: auto;
+        }
+
+        h2 {
+            margin-top: 20px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        th, td {
+            padding: 12px;
+            text-align: left;
+            border: 1px solid #ddd; /* Add borders to cells */
+        }
+
+        th {
+            cursor: pointer;
+        }
+
+        img {
+            max-width: 30px;
+            max-height: 30px;
+            margin-right: 10px;
+        }
+
+        body.dark-mode {
+            background-color: #333;
+            color: #fff;
+        }
+
+        tr:hover {
+            background-color: #e6f7ff; /* Light blue color for row hover */
+        }
+
+        th, td {
+            border: 1px solid #ddd; /* Add borders to cells */
+        }
+
+        /* Highlight the first row with light blue color */
+        tbody tr:first-child {
+            background-color: #a6c8ff;
+        }
+
+        /* Additional styles for KPIs */
+        .kpi-container {
+            margin-top: 20px;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .kpi-card {
+            padding: 10px;
+            border: 1px solid #ddd;
+            flex: 1;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>Cryptocurrency Visualization Trends</h1>
+    </div>
+
+    <div>
+        <!-- Display top 10 expensive cryptocurrencies bar plot -->
+        {{ fig_expensive|safe }}
+    </div>
+
+    <div>
+        <!-- Display top 10 cryptocurrencies by max supply bar plot -->
+        {{ fig_max_supply|safe }}
+    </div>
+
+    <div>
+        <h2>Top 10 Expensive Cryptocurrencies</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Symbol</th>
+                    <th>Name</th>
+                    <th>Max Supply</th>
+                    <th>Rate(in USD)</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for crypto in top_10_expensive %}
+                    <tr>
+                        <td>{{ crypto.symbol }}</td>
+                        <td>{{ crypto.name_full }}</td>
+                        <td>{{ crypto.max_supply }}</td>
+                        <td>{{ crypto.rate }}</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+    <div>
+        <h2>Top 10 Cryptocurrencies by Max Supply</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Symbol</th>
+                    <th>Name</th>
+                    <th>Max Supply</th>
+                    <th>Rate(in USD)</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for crypto in top_10_max_supply %}
+                    <tr>
+                        <td>{{ crypto.symbol }}</td>
+                        <td>{{ crypto.name_full }}</td>
+                        <td>{{ crypto.max_supply }}</td>
+                        <td>{{ crypto.rate }}</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+    <!-- KPIs for average rate and max supply -->
+    <h2>Top 2 KPIs</h2>
+    <div class="kpi-container">
+        <div class="kpi-card">
+            <h3>Average Rate</h3>
+            <p>{{ average_rate }}</p>
+        </div>
+        <div class="kpi-card">
+            <h3>Average Max Supply</h3>
+            <p>{{ average_max_supply }}</p>
+        </div>
+    </div>
+
+    <div class="footer">
+        <p>&copy; 2023 Crypto Trading. All rights reserved.</p>
+    </div>
+</body>
+</html>

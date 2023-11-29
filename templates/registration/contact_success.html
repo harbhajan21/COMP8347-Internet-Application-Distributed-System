@@ -1,0 +1,70 @@
+<!-- registration/contact_success.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Success</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        .header {
+            text-align: center;
+            background-color: #3498db; 
+            color: #fff; 
+            padding: 20px;
+        }
+
+        h2 {
+            text-align: center;
+        }
+
+        .content {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 20px;
+        }
+
+        .footer {
+            text-align: center;
+            background-color: #3498db;
+            color: #fff;
+            padding: 10px;
+        }
+    </style>
+    <script src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
+</head>
+<body>
+    <div class="header">
+        <h2>Success Message</h2>
+    </div>
+
+    <div class="content">
+        <p>Email Sent successfully!!!</p>
+        <!-- <script>
+            // Show a toast message based on the success parameter
+            Toastify({
+                text: "{% if message == 'success' %}E-mail has been sent successfully.{% endif %}",
+                duration: 3000,  // 3 seconds
+                close: true,
+                gravity: "bottom",  // Display at the bottom
+                position: "right",  // Display on the right side
+                container: document.body,  // Specify the container
+            }).showToast();
+        </script> -->
+    </div>
+
+    <div class="footer">
+        <p>&copy; 2023 Crypto Trading. All rights reserved.</p>
+    </div>
+</body>
+</html>

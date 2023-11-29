@@ -1,0 +1,126 @@
+<!-- templates/crypto_chart.html -->
+{% load static %}  
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Crypto Chart</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f8f9fa; /* Light gray background */
+            color: #343a40; /* Dark text color */
+            transition: background-color 0.5s ease;
+            margin: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: space-between;
+            min-height: 100vh;
+        }
+
+        .header {
+            text-align: center;
+            background-color: #3498db; 
+            color: #fff; 
+            padding: 20px;
+            width: 100%;
+        }
+
+        .footer {
+            text-align: center;
+            background-color: #3498db;
+            color: #fff;
+            padding: 10px;
+            width: 100%;
+        }
+
+        h2 {
+            margin-bottom: 20px;
+        }
+
+        form {
+            max-width: 500px;
+            width: 100%;
+            margin: 20px auto;
+        }
+
+        input,
+        textarea {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+            box-sizing: border-box;
+        }
+
+        button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 15px;
+            border: none;
+            cursor: pointer;
+        }
+
+        body.dark-theme {
+            background-color: #343a40; /* Dark gray background */
+            color: #dee2e6; /* Light text color */
+        }
+    </style>
+     <script src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
+     <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+</head>
+<body>
+    <div class="header">
+        <h1>Crypto Chart</h1>
+    </div>
+    
+    <form method="post">
+        {% csrf_token %}
+        <label for="crypto_symbol">Select Cryptocurrency:</label>
+        <select id="crypto_symbol" name="crypto_symbol">
+            <option value="BTC">Bitcoin</option>
+            <option value="ETH">Ethereum</option>
+            <option value="XTZ">Tezos</option>
+            <option value="MIOTA">IOTA</option>
+            <option value="DASH">Dash</option>
+            <option value="VET">VeChain</option>
+            <option value="XEM">NEM</option>
+            <option value="DOGE">Dogecoin</option>
+            <option value="BAT">Basic Attention Token</option>
+            <option value="ZEC">Zcash</option>
+            <option value="OMG">OmiseGO</option>
+            <option value="ZRX">0x</option>
+            <option value="KNC">Kyber Network</option>
+            <option value="ALGO">Algorand</option>
+            <option value="REN">Ren</option>
+            <!-- Add more cryptocurrency options as needed -->
+        </select>
+        <br>
+        <label for="chart_interval">Select Chart Interval:</label>
+        <select id="chart_interval" name="chart_interval">
+            <option value="DAILY">Daily</option>
+            <option value="WEEKLY">Weekly</option>
+            <option value="MONTHLY">Monthly</option>
+        </select>
+        <br>
+        <br>
+       
+        <button type="submit">Generate Chart</button>
+    </form>
+    {% if plot_div %}
+        {{ plot_div|safe }}
+    {% else %}
+        {% if error_message %}
+            <p>{{ error_message }}</p>
+        {% else %}
+            <p>No chart data available.</p>
+            <!-- <img src="{% static ' C:/Users/rahul/Downloads/Internet Application Project/COMP8347-Internet-Application-Distributed-System/crypto_plot.png' %}" alt="Default Crypto Chart"> -->
+            <!-- C:/Users/rahul/Downloads/Internet Application Project/COMP8347-Internet-Application-Distributed-System/crypto_plot.png -->
+        {% endif %}
+    {% endif %}
+        <div class="footer">
+        <p>&copy; 2023 Crypto Trading. All rights reserved.</p>
+    </div>
+</body>
+</html>

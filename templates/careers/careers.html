@@ -1,0 +1,127 @@
+<!-- crypto_website/templates/careers/careers.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Careers</title>
+    <!-- Add your existing styles here -->
+    
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f8f9fa; /* Light gray background */
+            color: #343a40; /* Dark text color */
+            transition: background-color 0.5s ease;
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: space-between;
+            min-height: 100vh;
+        }
+
+        .header {
+            text-align: center;
+            background-color: #3498db; 
+            color: #fff; 
+            padding: 20px;
+            width: 100%;
+        }
+
+        .footer {
+            text-align: center;
+            background-color: #3498db;
+            color: #fff;
+            padding: 10px;
+            width: 100%;
+        }
+
+        h1 {
+            margin: 10px 0;
+        }
+
+        .job-profile {
+            border: 1px solid #ddd;
+            padding: 20px;
+            margin: 20px 0;
+            background-color: #fff;
+            border-radius: 8px;
+            margin: 20px 10%; /* Added margin from left and right */
+        }
+
+        .job-profile h2 {
+            color: #3498db;
+        }
+
+        .recruiter-email {
+            margin: 20px auto;
+            text-align: center;
+        }
+
+        .recruiter-email p {
+            margin-bottom: 10px;
+        }
+
+        button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 15px;
+            border: none;
+            cursor: pointer;
+        }
+
+        body.dark-theme {
+            background-color: #343a40; /* Dark gray background */
+            color: #dee2e6; /* Light text color */
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>Careers</h1>
+    </div>
+    
+    <div>
+        <!-- Display job profiles -->
+        {% for job_profile in job_profiles %}
+            <div class="job-profile">
+                <h2>{{ job_profile.title }}</h2>
+                <p><strong>Job Description:</strong> {{ job_profile.description }}</p>
+                <p><strong>Requirements:</strong> {{ job_profile.requirements }}</p>
+            </div>
+        {% endfor %}
+    </div>
+
+    <div class="recruiter-email">
+        <p><strong>General Recruiter Email:</strong> recruiter@cryptocurrency.com</p>
+        <button id="copyEmailButton">Copy Email</button>
+    </div>
+
+    <div class="footer">
+        <p>&copy; 2023 Crypto Trading. All rights reserved.</p>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
+    <script>
+        // Function to copy the general recruiter email to clipboard
+        document.getElementById('copyEmailButton').addEventListener('click', function () {
+            const emailToCopy = 'recruiter@cryptocurrency.com';
+            navigator.clipboard.writeText(emailToCopy)
+                .then(() => {
+                    // Show a success toast message
+                    Toastify({
+                        text: "Recruiter email copied to clipboard!",
+                        duration: 3000,
+                        close: true,
+                        gravity: "bottom",
+                        position: "right",
+                    }).showToast();
+                })
+                .catch((err) => {
+                    console.error('Error copying to clipboard: ', err);
+                });
+        });
+    </script>
+</body>
+</html>

@@ -27,6 +27,7 @@ urlpatterns = [
     path('signup/', views.signup_view, name='signup'),
     path('signin/', views.signin_view, name='signin'),
     path('success/', views.success_view, name='success_view'),
+    path('success_email/', views.success_email_view, name='success_email_view'),
     path('homepage/', views.homepage_view, name='homepage_view'),
     path('signout/', views.signout_view, name='signout'),
     path('trading/', views.trading_view, name='trading'),
@@ -36,8 +37,19 @@ urlpatterns = [
     path('payment-confirm/', views.payment_confirm, name='payment_confirm'),
     # path('paypal/', include('paypal.standard.ipn.urls')),
     path('contact/', views.contact, name='contact'),
+    path('contact_success/', views.contact_success, name='contact_success'),  # Add this line
+
+
     path('livecurrencyrates/', views.crypto_dashboard, name='crypto_dashboard'),
+    path('visualize/', views.visualize_dashboard, name='visualize_dashboard'),
+    #path('crypto-to-crypto/', views.crypto_to_crypto, name='crypto-to-crypto'), 
+    #path('crypto-to-currency/', views.crypto_to_currency, name='crypto-to-currency'),
+    path('crypto_prices/', views.crypto_prices, name='crypto_prices'),
     path('about-us/', views.about_us, name='about_us'),
+    path('careers/', views.careers, name='careers'),
+    path('crypto-chart/', views.crypto_chart, name='crypto_chart'),
+     path('get_crypto_data/', views.get_crypto_data, name='get_crypto_data'),
+
 ]
 
 if settings.DEBUG:

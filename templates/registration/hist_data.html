@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Crypto Data</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+
+        form {
+            max-width: 500px;
+            margin: 0 auto;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        select, input {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+            box-sizing: border-box;
+        }
+
+        button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 15px;
+            border: none;
+            cursor: pointer;
+        }
+
+        #cryptoChart {
+            margin-top: 20px;
+            width: 80%;
+            margin-left: auto;
+            margin-right: auto;
+        }
+    </style>
+</head>
+<body>
+    <h1>Crypto Data</h1>
+  
+    <form id="cryptoForm">
+        <label for="pairType">Pair Type:</label>
+        <select id="pairType" name="pair_type">
+            <option value="histoday">Daily Pair</option>
+            <option value="histohour">Hourly Pair</option>
+            <option value="histominute">Minute Pair</option>
+        </select>
+
+        <label for="crypto">Cryptocurrency:</label>
+        <select id="crypto" name="crypto">
+            <option value="BTC">BTC</option>
+            <option value="ETH">ETH</option>
+            <option value="DOGE">DOGE</option>
+        </select>
+
+        <label for="currency">Currency:</label>
+        <select id="currency" name="currency">
+            <option value="USD">USD</option>
+            <option value="INR">INR</option>
+            <option value="EURO">EURO</option>
+        </select>
+
+        <label for="limit">Limit:</label>
+        <input type="number" id="limit" name="limit" value="10" required>
+
+        <button type="submit">Generate Chart</button>
+    </form>
+
+    <canvas id="cryptoChart" width="800" height="400"></canvas>
+
+    <!-- This container will hold the Plotly chart -->
+    <div id="plotlyChartContainer"></div>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+    <script>
+        document.getElementById('cryptoForm').addEventListener('submit', function (event) {
+            event.preventDefault();
+
+            const pairType = document.getElementById('pairType').value;
+            const crypto = document.getElementById('crypto').value;
+            const currency = document.getElementById('currency').value;
+            const limit = document.getElementById('limit').value;
+
+            fetch(`/get_crypto_data/?pair_type=${pairType}&crypto=${crypto}&currency=${currency}&limit=${limit}`)
+                .then(response => response.json())
+                .then(data => {
+                    // Update the HTML content of the 'plotlyChartContainer' div with the Plotly plot
+                    document.getElementById('plotlyChartContainer').innerHTML = data.plot;
+                })
+                .catch(error => console.error('Error fetching data:', error));
+        });
+    </script>
+</body>
+</html>

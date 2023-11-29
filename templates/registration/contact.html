@@ -8,11 +8,36 @@
         body {
             font-family: Arial, sans-serif;
             margin: 20px;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        .header {
+            text-align: center;
+            background-color: #3498db; 
+            color: #fff; 
+            padding: 20px;
+        }
+
+        h2 {
+            text-align: center;
+        }
+
+        .footer {
+            text-align: center;
+            background-color: #3498db;
+            color: #fff;
+            padding: 10px;
+            margin-top: auto;
         }
 
         form {
             max-width: 500px;
-            margin: 0 auto;
+            width: 100%;
+            margin: auto; /* Center the form horizontally */
+            display: flex;
+            flex-direction: column;
         }
 
         input,
@@ -33,7 +58,9 @@
     </style>
 </head>
 <body>
-    <h2>Contact Us</h2>
+    <div class="header">
+        <h2>Contact Us</h2>
+    </div>
     <form method="post">
         {% csrf_token %}
         <label for="name">Name:</label>
@@ -50,5 +77,8 @@
 
         <button type="submit">Submit</button>
     </form>
+    <div class="footer">
+        <p>&copy; 2023 Crypto Trading. All rights reserved.</p>
+    </div>
 </body>
 </html>

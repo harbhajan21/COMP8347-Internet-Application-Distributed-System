@@ -1,0 +1,22 @@
+<form method="POST">
+    {% csrf_token %} 
+    <select name="from_currency">
+      {% for currency in currencies %}
+        <option>{{ currency }}</option>
+      {% endfor %}
+    </select>
+  
+    <select name="to_currency">
+      {% for currency in currencies %}
+        <option>{{ currency }}</option>
+      {% endfor %}
+    </select>
+  
+    <input name="amount">
+  
+    <button type="submit">Convert</button>
+  </form>
+  
+  {% if result %}
+    <p>Result: {{ result }}</p>
+  {% endif %}

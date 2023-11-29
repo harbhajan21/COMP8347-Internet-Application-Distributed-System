@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Crypto Prices</title>
+    <!-- Include Bootstrap CSS (you can download and host it locally) -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <!-- Custom CSS for styling -->
+    <style>
+       body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f8f9fa; /* Light gray background */
+            color: #343a40; /* Dark text color */
+            transition: background-color 0.5s ease;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        .header {
+            text-align: center;
+            background-color: #3498db; 
+            color: #fff; 
+            padding: 20px;
+        }
+
+        .form-container {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .form-wrapper {
+            width: 80%;
+        }
+
+        .form-group {
+            margin-top: 10px;
+        }
+
+        .btn-get-prices {
+            margin-top: 20px;
+        }
+
+        .footer {
+            text-align: center;
+            background-color: #3498db;
+            color: #fff;
+            padding: 10px;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header Section -->
+    <header class="header">
+        <h1>Crypto Trading Application</h1>
+    </header>
+    
+    <div class="container form-container">
+        <div class="form-wrapper">
+            <h1 class="text-center">Check Cryptocurrencies with Currencies.</h1>
+
+            <form method="post" class="text-center">
+                {% csrf_token %}
+                <div class="form-group">
+                    <label for="cryptos"><i>Select Cryptocurrencies:</i></label>
+                    <select name="cryptos" multiple required class="form-control">
+                    
+            <option value="BTC">Bitcoin</option>
+            <option value="ETH">Ethereum</option>
+            <option value="ADA">Cardano</option>
+            <option value="XRP">Ripple</option>
+            <option value="LTC">Litecoin</option>
+            <option value="BCH">Bitcoin Cash</option>
+            <option value="DOT">Polkadot</option>
+            <option value="LINK">Chainlink</option>
+            <option value="BNB">Binance Coin</option>
+            <option value="XLM">Stellar</option>
+            <option value="USDT">Tether</option>
+            <option value="XMR">Monero</option>
+            <option value="EOS">EOS</option>
+            <option value="TRX">TRON</option>
+            <option value="NEO">NEO</option>
+            <option value="ATOM">Cosmos</option>
+            <option value="XTZ">Tezos</option>
+            <option value="MIOTA">IOTA</option>
+            <option value="DASH">Dash</option>
+            <option value="VET">VeChain</option>
+            <option value="XEM">NEM</option>
+            <option value="DOGE">Dogecoin</option>
+            <option value="BAT">Basic Attention Token</option>
+            <option value="ZEC">Zcash</option>
+            <option value="OMG">OmiseGO</option>
+            <option value="ZRX">0x</option>
+            <option value="KNC">Kyber Network</option>
+            <option value="ALGO">Algorand</option>
+            <option value="REN">Ren</option>
+        </select>
+    </div>
+
+    <div class="form-group">
+        <label for="currencies"><i>Select Currencies:</i></label>
+        <select name="currencies" multiple required class="form-control">
+    
+            <option value="USD">US Dollar</option>
+            <option value="JPY">Japanese Yen</option>
+            <option value="EUR">Euro</option>
+            <option value="GBP">British Pound</option>
+            <option value="AUD">Australian Dollar</option>
+            <option value="CAD">Canadian Dollar</option>
+            <option value="INR">Indian Rupee</option>
+            <option value="CNY">Chinese Yuan</option>
+            <option value="RUB">Russian Ruble</option>
+            <option value="BRL">Brazilian Real</option>
+            <option value="MXN">Mexican Peso</option>
+            <option value="KRW">South Korean Won</option>
+            <option value="TRY">Turkish Lira</option>
+            <option value="SGD">Singapore Dollar</option>
+            <option value="HKD">Hong Kong Dollar</option>
+            <option value="SEK">Swedish Krona</option>
+            <option value="NZD">New Zealand Dollar</option>
+            <option value="CHF">Swiss Franc</option>
+            <option value="NOK">Norwegian Krone</option>
+            <option value="ZAR">South African Rand</option>
+            <option value="DKK">Danish Krone</option>
+            <option value="PLN">Polish Złoty</option>
+            <option value="THB">Thai Baht</option>
+            <option value="IDR">Indonesian Rupiah</option>
+            <option value="MYR">Malaysian Ringgit</option>
+            <option value="PHP">Philippine Peso</option>
+            <option value="AED">United Arab Emirates Dirham</option>
+            <option value="SAR">Saudi Riyal</option>
+        </select>
+    </div>
+
+    <div class="form-group">
+        <button type="submit" class="btn btn-primary btn-get-prices">Get Prices</button>
+    </div>
+</form>
+</div>
+</div>
+
+<!-- Include jQuery and Bootstrap JS (you can download and host them locally) -->
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+
+<script>
+// Dark theme toggle
+document.body.classList.toggle('dark-theme', localStorage.getItem('dark-theme') === 'enabled');
+
+document.addEventListener('DOMContentLoaded', function () {
+document.getElementById('themeToggle').addEventListener('change', function () {
+    const darkThemeEnabled = this.checked;
+    document.body.classList.toggle('dark-theme', darkThemeEnabled);
+    localStorage.setItem('dark-theme', darkThemeEnabled ? 'enabled' : 'disabled');
+});
+});
+</script>
+
+<footer class="footer">
+<p>&copy; 2023 Crypto Trading. All rights reserved.</p>
+</footer>
+</body>
+</html>

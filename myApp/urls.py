@@ -2,7 +2,8 @@ from django.urls import path, include
 from myApp import views
 # from django.urls import path
 # from .views import contact
-
+from django.conf import settings
+from django.conf.urls.static import static
 urlpatterns = [
     # ... Other URL patterns ...
     path('', views.homepage, name='homepage'),  # Set homepage.html as the default homepage
@@ -21,9 +22,20 @@ urlpatterns = [
     path('place_order/',views.place_order, name='place_order'),
     # path('paypal/', include('paypal.standard.ipn.urls')),
     path('contact/', views.contact, name='contact'),
+    path('contact_success', views.contact_success, name='contact_success'),
+
     path('livecurrencyrates/', views.crypto_dashboard, name='crypto_dashboard'),
+    path('visualize/', views.visualize_dashboard, name='visualize_dashboard'),
+    #path('crypto-to-crypto/', views.crypto_to_crypto, name='crypto-to-crypto'), 
+    #path('crypto-to-currency/', views.crypto_to_currency, name='crypto-to-currency'),
+    path('crypto_prices/', views.crypto_prices, name='crypto_prices'),
     path('about-us/', views.about_us, name='about_us'),
+     path('careers/', views.careers, name='careers'),
+path('get_crypto_data/', views.get_crypto_data, name='get_crypto_data'),
+
   
 ]
 
 
+if settings.DEBUG:
+    urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
