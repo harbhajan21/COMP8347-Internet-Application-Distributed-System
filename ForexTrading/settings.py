@@ -49,6 +49,8 @@ MIDDLEWARE = [
     "django.contrib.auth.middleware.AuthenticationMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
+    "myApp.middleware.AutoLogoutMiddleware",
+
 ]
 
 ROOT_URLCONF = "ForexTrading.urls"
@@ -128,3 +130,13 @@ DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
+
+#Session and cookies
+# Use database-backed sessions
+SESSION_ENGINE = 'django.contrib.sessions.backends.db'
+
+# Set the session timeout to 1 minute (in seconds)
+SESSION_COOKIE_AGE = 600
+#
+# SESSION_EXPIRE_SECONDS = 30  # 300 seconds = 5 minutes
+# SESSION_EXPIRE_AFTER_LAST_ACTIVITY = True

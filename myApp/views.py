@@ -84,7 +84,7 @@ def signin_view(request):
             user = authenticate(username=username, password=password)
             if user is not None:
                 login(request, user)
-                return redirect('homepage_view')
+                return redirect('homepage')
     else:
         form = SigninForm()
     return render(request, 'registration/signin.html', {'form': form})
