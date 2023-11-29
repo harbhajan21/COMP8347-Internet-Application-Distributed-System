@@ -1,4 +1,3 @@
-<!-- crypto_rates/templates/crypto_rates/crypto_dashboard.html -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -7,43 +6,87 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Crypto Dashboard</title>
     <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f8f9fa; /* Light gray background */
+            color: #343a40; /* Dark text color */
+            transition: background-color 0.5s ease;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        .header {
+            text-align: center;
+            background-color: #3498db; 
+            color: #fff; 
+            padding: 20px;
+        }
+
+        h1 {
+            text-align: center;
+        }
+
+        .footer {
+            text-align: center;
+            background-color: #3498db;
+            color: #fff;
+            padding: 10px;
+            margin-top: auto;
+        }
+
         table {
             width: 100%;
             border-collapse: collapse;
             margin-top: 20px;
         }
+
         th, td {
             padding: 12px;
             text-align: left;
             border-bottom: 1px solid #ddd;
         }
+
         th {
             cursor: pointer;
         }
+
         img {
             max-width: 30px;
             max-height: 30px;
             margin-right: 10px;
         }
+
+        body.dark-mode {
+            background-color: #333;
+            color: #fff;
+        }
+
+        tr:hover {
+            background-color: #e6f7ff; /* Light blue color for row hover */
+        }
     </style>
 </head>
 <body>
-    <h1>Crypto Dashboard</h1>
+    <div class="header">
+        <h1>Cryptocurrency Live Rates</h1>
+    </div>
+
     <div>
-        <label for="modeSwitch">Mode:</label>
+        <label for="modeSwitch">Dark Mode:</label>
         <input type="checkbox" id="modeSwitch" onclick="toggleDarkMode()">
     </div>
-    {% load static %}  
+
     <table id="cryptoTable">
         <thead>
             <tr>
-                <th>Serial Number</th>
-                <th>Cryptocurrency Name</th>
+                <th onclick="sortTable(0)">Serial Number</th>
+                <th onclick="sortTable(1)">Cryptocurrency Name</th>
                 <th>Logo</th>
-                <!-- <th>Rate</th> -->
-                <th>Max Supply</th>
-                <th> Full Name</th>
-                <th> Symbol</th>
+                <th>Rate(in USD)</th>
+                <th onclick="sortTable(3)">Max Supply</th>
+                <th onclick="sortTable(4)">Full Name</th>
+                <th onclick="sortTable(5)">Symbol</th>
             </tr>
         </thead>
         <tbody>
@@ -52,12 +95,10 @@
                     <td>{{ crypto.serial_number }}</td>
                     <td>{{ crypto.cryptocurrency_name }}</td>
                     <td><img src="{{ crypto.cryptocurrency_logo }}" alt="{{ crypto.cryptocurrency_name }} Logo"></td>
-                    <!-- <td>{{ crypto.rate }}</td> -->
-                    <!-- Add new columns for max supply, name_full, and symbol -->
+                    <td>{{ crypto.rate }}</td>
                     <td>{{ crypto.max_supply }}</td>
                     <td>{{ crypto.name_full }}</td>
                     <td>{{ crypto.symbol }}</td>
-    
                 </tr>
             {% endfor %}
         </tbody>
@@ -66,7 +107,6 @@
     <script>
         // crypto_rates/static/crypto_rates/js/crypto_dashboard.js
 
-        // Function to toggle dark mode
         function toggleDarkMode() {
             const body = document.body;
             body.classList.toggle('dark-mode');
@@ -81,6 +121,55 @@
         function unhighlightRow(row) {
             row.style.backgroundColor = ''; // Remove the custom background color
         }
+
+        // Function to sort the table
+        function sortTable(columnIndex) {
+            var table, rows, switching, i, x, y, shouldSwitch;
+            table = document.getElementById("cryptoTable");
+            switching = true;
+
+            // Set the sorting direction to ascending
+            var direction = "asc";
+
+            while (switching) {
+                switching = false;
+                rows = table.rows;
+
+                for (i = 1; i < (rows.length - 1); i++) {
+                    shouldSwitch = false;
+                    x = rows[i].getElementsByTagName("td")[columnIndex];
+                    y = rows[i + 1].getElementsByTagName("td")[columnIndex];
+
+                    if (direction == "asc") {
+                        if (x.innerHTML.toLowerCase() > y.innerHTML.toLowerCase()) {
+                            shouldSwitch = true;
+                            break;
+                        }
+                    } else if (direction == "desc") {
+                        if (x.innerHTML.toLowerCase() < y.innerHTML.toLowerCase()) {
+                            shouldSwitch = true;
+                            break;
+                        }
+                    }
+                }
+
+                if (shouldSwitch) {
+                    rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
+                    switching = true;
+
+                    // Toggle the direction for the next iteration
+                    if (direction == "asc") {
+                        direction = "desc";
+                    } else {
+                        direction = "asc";
+                    }
+                }
+            }
+        }
     </script>
+
+    <div class="footer">
+        <p>&copy; 2023 Crypto Trading. All rights reserved.</p>
+    </div>
 </body>
 </html>

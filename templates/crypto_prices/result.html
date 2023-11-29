@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Crypto Prices Result</title>
+    <!-- Include Bootstrap CSS (you can download and host it locally) -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+
+    <!-- Custom CSS for styling -->
+    <style>
+        .header {
+            text-align: center;
+            background-color: #3498db; 
+            color: #fff; 
+            padding: 20px;
+        }
+
+        .footer {
+            text-align: center;
+            background-color: #3498db;
+            color: #fff;
+            padding: 10px;
+            position: absolute;
+            bottom: 0;
+            width: 100%;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f8f9fa; /* Light gray background */
+            color: #343a40; /* Dark text color */
+            transition: background-color 0.5s ease;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        .container-wrapper {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .container {
+            width: 80%;
+        }
+
+        ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        li {
+            margin-bottom: 10px;
+            padding: 15px;
+            background-color: #fff; /* White background */
+            border: 1px solid #dee2e6; /* Light gray border */
+            transition: background-color 0.3s ease;
+        }
+
+        li:hover {
+            background-color: #f1f8ff; /* Light blue hover effect */
+        }
+
+        /* Dark theme styling */
+        body.dark-theme {
+            background-color: #343a40; /* Dark gray background */
+            color: #dee2e6; /* Light text color */
+        }
+
+        body.dark-theme li {
+            background-color: #495057; /* Dark background */
+            border-color: #495057; /* Dark border color */
+        }
+
+        body.dark-theme li:hover {
+            background-color: #495057; /* Dark gray hover effect */
+        }
+    </style>
+</head>
+<body>
+    <!-- Header Section -->
+    <header class="header">
+        <h1>Crypto Trading Application</h1>
+    </header>
+
+    <div class="container-wrapper">
+        <div class="container">
+            <h1>Crypto Prices Result</h1>
+
+            {% if prices %}
+                <ul>
+                    {% for crypto, price_data in prices.items %}
+                        <li>
+                            <strong>{{ crypto }}</strong>:
+                            {% if 'error' in price_data %}
+                                {{ price_data.error }}
+                            {% else %}
+                                {% for currency, value in price_data.items %}
+                                    <span>{{ currency }}:</span> <span>{{ value }}</span>
+                                {% endfor %}
+                            {% endif %}
+                        </li>
+                    {% endfor %}
+                </ul>
+            {% else %}
+                <p>No prices available.</p>
+            {% endif %}
+
+            <a href="{% url 'crypto_prices' %}" class="btn btn-primary">Go back to Crypto Prices form</a>
+        </div>
+    </div>
+
+    <!-- Include jQuery and Bootstrap JS (you can download and host them locally) -->
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+
+    <script>
+        // Dark theme toggle
+        document.body.classList.toggle('dark-theme', localStorage.getItem('dark-theme') === 'enabled');
+
+        document.addEventListener('DOMContentLoaded', function () {
+            document.getElementById('themeToggle').addEventListener('change', function () {
+                const darkThemeEnabled = this.checked;
+                document.body.classList.toggle('dark-theme', darkThemeEnabled);
+                localStorage.setItem('dark-theme', darkThemeEnabled ? 'enabled' : 'disabled');
+            });
+        });
+    </script>   
+
+    <footer class="footer">
+        <p>&copy; 2023 Crypto Trading. All rights reserved.</p>
+    </footer>
+</body>
+</html>

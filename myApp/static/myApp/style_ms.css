@@ -1,92 +1,66 @@
-/* Reset default styles and add some basic styling */
-* {
+/*
+Reset some default styles
+body, h1, h2, h3, p {
     margin: 0;
     padding: 0;
-    box-sizing: border-box;
 }
 
 body {
     font-family: 'Arial', sans-serif;
-    background-color: #f0f0f0;
 }
 
-.container {
-    max-width: 800px;
-    margin: 0 auto;
-}
 
 .header {
-    background-color: #3f51b5;
-    color: white;
-    text-align: center;
+    text-align: left;
+    background-color: #3498db; 
+    color: #fff; 
     padding: 20px;
 }
 
+
 .navbar {
-    background-color: #f8f9fa;
-    padding: 10px;
+    background-color: #3498db;
 }
 
-.team-member {
-    text-align: center;
-    margin: 20px 0;
+.navbar-light .navbar-brand {
+    color: #fff;
 }
 
-.footer {
-    background-color: #3f51b5;
-    color: white;
-    text-align: center;
-    padding: 10px;
+.navbar-light .navbar-nav .nav-link {
+    color: #fff;
 }
 
-/* Improved styling for the about section */
-.about-section {
-    text-align: center;
+
+.container {
+    text-align: left;
+    padding: 20px;
+}
+
+.about-section, .team-section {
     margin-bottom: 30px;
 }
 
-.about-section h2 {
-    font-size: 24px;
-    color: #333;
-    margin-bottom: 15px;
+
+.team-member {
+    border: 1px solid #3498db;
+    padding: 10px;
+    margin: 10px;
 }
 
-.about-section p {
-    font-size: 16px;
-    color: #555;
-    line-height: 1.6;
+.footer {
+    text-align: left;
+    background-color: #3498db;
+    color: #fff;
+    padding: 10px;
 }
 
-/* Improved styling for the team section */
-.team-section {
-    text-align: center;
+
+a {
+    color: #3498db;
 }
 
-.team-section h3 {
-    font-size: 20px;
-    color: #333;
-    margin-bottom: 20px;
+a:hover {
+    color: #217dbb; 
 }
 
-.team-member img {
-    max-width: 100%;
-    border-radius: 50%;
-    margin-bottom: 10px;
-}
-
-.team-member p {
-    font-size: 16px;
-    color: #555;
-}
-
-/* Add more styles as needed */
-
-/* Media query for responsive design */
-@media (max-width: 768px) {
-    .navbar {
-        padding: 10px 0;
-    }
-    .team-member img {
-        max-width: 80%;
-    }
-}
+*/
