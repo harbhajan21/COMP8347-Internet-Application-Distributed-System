@@ -19,7 +19,7 @@ from django.contrib.auth.views import PasswordResetView
 from django.shortcuts import render, redirect
 from forms import SigninForm
 from django.contrib.auth import logout
-from .models import UserProfile, Payment
+from .models import UserProfile, Payment, Transaction
 from django.contrib import messages
 from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
@@ -112,11 +112,16 @@ def signout_view(request):
 
 
 def trading_view(request):
+    symbol = request.GET.get('symbol', 'DefaultSymbol')
+    name = request.GET.get('name', 'DefaultName')
+    price = request.GET.get('price', '0')
+
     # Your API key from Alpha Vantage
     # api_key = 'F8FLNKTMJ6DRQNE6'
     # interval = '60min'  # Set the desired interval
     #
     # url = f'https://www.alphavantage.co/query?function=TIME_SERIES_INTRADAY&symbol=IBM&interval={interval}&apikey={api_key}'
+    #url = f'https://www.alphavantage.co/query?function=CRYPTO_INTRADAY&symbol=ETH&market=USD&interval={interval}&outputsize=full&apikey={api_key}'
     # response = requests.get(url)
     # data = response.json()
     # print("Api response:", data)
@@ -148,7 +153,10 @@ def trading_view(request):
     context = {
         'data': json.dumps([]),
         'labels': json.dumps([]),
-        'error': 'Time series data not found'
+        'error': 'Time series data not found',
+        'coin_symbol': symbol,
+        'coin_name': name,
+        'coin_price': price,
     }
     return render(request, 'registration/trading.html', context)
 
@@ -278,7 +286,7 @@ def sell_coin(request, symbol):
     # Logic for selling the coin
     return render(request, 'highlights/sell_coin.html', {'symbol': symbol})
 
-@login_required
+
 def dashboard(request):
     api_key = 'coinrankingae631d1d5459748c6ec3a765f23471d6c612b840fc2d9938'
     headers = {'x-access-token': api_key}
@@ -318,3 +326,35 @@ def my_view(request):
         'data': data_json,
         'labels': labels_json
     })
+
+
+@login_required
+def place_order(request):
+    if request.method == 'POST':
+        # Extract data from the form
+        coin_symbol = request.POST.get('coin_symbol')
+        coin_name = request.POST.get('coin_name')
+        quantity = request.POST.get('quantity')
+        price = request.POST.get('price')
+        transaction_type = request.POST.get('transaction_type')  # 'BUY' or 'SELL'
+
+        # Assuming 'request.user' is the current user
+        max_balance_payment = Payment.objects.filter(user=request.user).aggregate(Max('account_balance'))
+        payment = Payment.objects.get(user=request.user, account_balance=max_balance_payment['account_balance__max'])
+        # payment = Payment.objects.get(user=request.user)
+
+        try:
+            transaction = Transaction(
+                payment=payment,
+                coin_symbol=coin_symbol,
+                coin_name=coin_name,
+                price_per_coin=price,
+                quantity=quantity,
+                transaction_type=transaction_type
+            )
+            transaction.save()
+            messages.success(request, 'Transaction successful.')
+        except ValidationError as e:
+            messages.error(request, str(e))
+
+    return redirect('homepage')

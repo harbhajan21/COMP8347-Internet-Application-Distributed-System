@@ -179,8 +179,8 @@
                                 <td>${{ coin.price }}</td>
                                 <td>
                                     <!-- Add Buy/Sell buttons with appropriate links -->
-                                    <a href="{% url 'buy' coin.symbol %}" class="btn btn-success btn-sm">Buy</a>
-                                    <a href="{% url 'sell' coin.symbol %}" class="btn btn-danger btn-sm">Sell</a>
+                                    <a href="{% url 'trading' %}?symbol={{ coin.symbol }}&name={{ coin.name }}&price={{ coin.price }}" class="btn btn-success btn-sm">Buy</a>
+                                    <a href="{% url 'trading' %}?symbol={{ coin.symbol }}&name={{ coin.name }}&price={{ coin.price }}" class="btn btn-danger btn-sm">Sell</a>
                                 </td>
                             </tr>
                             {% endfor %}
