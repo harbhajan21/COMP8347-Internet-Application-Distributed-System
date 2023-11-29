@@ -33,24 +33,31 @@
         <label for="modeSwitch">Mode:</label>
         <input type="checkbox" id="modeSwitch" onclick="toggleDarkMode()">
     </div>
+    {% load static %}  
     <table id="cryptoTable">
         <thead>
             <tr>
                 <th>Serial Number</th>
                 <th>Cryptocurrency Name</th>
-                <th>Cryptocurrency Logo</th>
-                <th>Rate</th>
-                <th>Trends</th>
+                <th>Logo</th>
+                <!-- <th>Rate</th> -->
+                <th>Max Supply</th>
+                <th> Full Name</th>
+                <th> Symbol</th>
             </tr>
         </thead>
         <tbody>
-            {% for symbol, rate in crypto_data.items %}
+            {% for crypto in crypto_list %}
                 <tr onmouseover="highlightRow(this)" onmouseout="unhighlightRow(this)">
-                    <td>{{ forloop.counter }}</td>
-                    <td>{{ symbol }}</td>
-                    <td>{{ symbol|lower }}_logo.png</td>
-                    <td>{{ rate }}</td>
-                    <td><!-- Add trends information here --></td>
+                    <td>{{ crypto.serial_number }}</td>
+                    <td>{{ crypto.cryptocurrency_name }}</td>
+                    <td><img src="{{ crypto.cryptocurrency_logo }}" alt="{{ crypto.cryptocurrency_name }} Logo"></td>
+                    <!-- <td>{{ crypto.rate }}</td> -->
+                    <!-- Add new columns for max supply, name_full, and symbol -->
+                    <td>{{ crypto.max_supply }}</td>
+                    <td>{{ crypto.name_full }}</td>
+                    <td>{{ crypto.symbol }}</td>
+    
                 </tr>
             {% endfor %}
         </tbody>
