@@ -27,7 +27,7 @@ from .forms import CustomUserCreationForm
 
 
 def homepage(request):
-    api_key = 'coinrankingae631d1d5459748c6ec3a765f23471d6c612b840fc2d9938'
+    api_key = 'Insert Your API Key Here'
     headers = {'x-access-token': api_key}
     api_url = "https://api.coinranking.com/v2/coins"
 
@@ -248,7 +248,7 @@ import requests
 
 
 def dashboard(request):
-    api_key = 'coinrankingae631d1d5459748c6ec3a765f23471d6c612b840fc2d9938'
+    api_key = 'Insert Your API Key Here'
     headers = {'x-access-token': api_key}
     # response = requests.get("https://api.coinranking.com/v2/coins", headers=headers)
     # data = response.json().get('data', {}).get('coins', [])[:50]  # Get the top 50 coins
@@ -280,7 +280,7 @@ def sell_coin(request, symbol):
 
 @login_required
 def dashboard(request):
-    api_key = 'coinrankingae631d1d5459748c6ec3a765f23471d6c612b840fc2d9938'
+    api_key = 'Insert Your API Key Here'
     headers = {'x-access-token': api_key}
     api_url = "https://api.coinranking.com/v2/coins"
 
